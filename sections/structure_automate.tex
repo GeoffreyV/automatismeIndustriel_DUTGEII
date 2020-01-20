@@ -1,0 +1,26 @@
+\section{Structures des systèmes automatisés}
+
+\begin{figure}[ht]
+	\centering
+	\input{tikz/structure.tikz}
+	\caption{Sructure d'un système industriel}
+	\label{fig:structureAPI}
+\end{figure}
+
+\UPSTIaRetenir{%
+	L'automate industriel constitue la \textbf{partie commande} d'un système industriel. Elle communique avec la \textit{partie opérative} en envoyant des \textit{commandes} aux \textbf{\color{green} pré-actionneurs} et reçoit des \textbf{\color{red} informations} de la part des capteurs.%
+}
+
+\UPSTIaRetenir{%
+Les \textbf{entrées} de l'automate sont reliées aux \textbf{capteurs} du système.\\
+Les \textbf{sorties} de l'automate sont reliées aux \textbf{pré-actionneurs} du système.}
+
+La Figure~\ref{fig:structureAPI} illustre la communication entre l'automate et la partie opérative d'un système. Il aparaît également l'\textbf{I}nterface \textbf{H}omme \textbf{M}achine (\textbf{IHM}) permettant de communiquer avec les utilisateurs ainsi qu'un réseau informatique pour communiquer avec des ordinateurs, d'autres automates ou même tout appareil sur internet.
+
+\input{sections/sousSections/capteurs}
+\input{sections/sousSections/actionneurs}
+\input{sections/sousSections/preActionneurs}
+\input{sections/sousSections/interfaceHommeMachine}
+\input{sections/sousSections/localeVsDeporte}
+
+\input{sections/bilan}

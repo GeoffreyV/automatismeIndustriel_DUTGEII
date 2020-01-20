@@ -1,0 +1,42 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Package UPSTI_Document
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{subcaption}
+\usepackage[usenames, svgnames, dvipsnames]{xcolor}
+\usepackage{UPSTI_Document}
+\usepackage{pgfplots}
+\definecolor{darkspringgreen}{rgb}{0.09, 0.45, 0.27}
+
+\newcommandx*{\dessinRepereFigGeo}[5][1=\vx{},2=\vy{},3=\vz{},4=,5=0]
+	{
+		\draw [->,very thick] (0,0) -- (1,0) ;
+		\draw [->,very thick] (0,0) -- (0,1) ;
+    \fill[white] (0,0) circle (0.13);
+    \draw [->,very thick] (0,0) circle (0.13);
+    \ifnumequal{#5}{0} {% z vers nous
+      \fill[black] (0,0) circle (0.03);
+      \draw [->,thick] (0,0) circle (0.04);
+    }{% z vers la feuille
+  		\begin{scope} [rotate=45]
+  			\draw [-,thick] (0,-0.12) -- (0,0.12) ;
+  			\draw [-,thick] (-0.12,0) -- (0.12,0) ;
+  		\end{scope}
+    }
+		\draw [anchor=north west] (1.1,0) node {${#1}$};
+		\draw [anchor=south west] (0,1.1) node {${#2}$};
+		\draw [anchor=north east] (-0.1,0) node {${#3}$};
+		\draw [anchor=north west] (-0.1,-0.1) node {${#4}$};
+	}
+
+	\usepackage{array}
+	\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+	\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+	\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+
+	\usepackage{pifont}% http://ctan.org/pkg/pifont
+\newcommand{\cmark}{\color{green}\ding{51}}%
+\newcommand{\xmark}{\color{red}\ding{55}}%
+\newcommand{\fmark}{\ding{229}}%
+\newcommand{\itemc}{\item[\cmark]}%
+\newcommand{\itemx}{\item[\xmark]}%
+\newcommand{\itemf}{\item[\fmark]}%

@@ -1,0 +1,28 @@
+\subsection{Strucure locale et distribuée}
+Comme nous l'avons vu dans la section précédente, les automates industriels sont reliés aux capteurs et pré-actionneurs du système.
+
+Sur les systèmes de petite taille et si l'installation le permet, les entrées et sorties de l'automate sont reliées directement à l'automate, on parle de \textbf{structure locale}. Pour des installations plus grande ou lorsque la configuration l'impose, les entrées et sorties sont reliées à des modules déportés (éloignés de l'automate), on parle de \textbf{structure déportée}. Ces deux configurations sont illustrée sur la Figure~\ref{fig:local_deporte}
+
+\begin{figure}[h]
+	\begin{subfigure}[b]{.49\textwidth}
+		\centering
+		\input{tikz/local_API.tikz}
+		\caption{Strucure locale}
+	\end{subfigure}
+	\begin{subfigure}[b]{.49\textwidth}
+	\centering
+	\input{tikz/depoted_API.tikz}
+	\caption{Strucure distribuée}
+	\end{subfigure}
+	\caption{Schéma de structure locale et déportée}
+	\label{fig:local_deporte}
+\end{figure}
+
+Les bus de terrain reliant les modules peuvent être de différentes natures selon la configuration (CAN, Profibus, LON, BACNET, Ethernet, \dots).
+
+\UPSTIaRetenir{%
+\begin{description}
+	\item [Sructure locale : ] Les modules d'entrées et de sorties sont reliées directements à l'automate.
+	\item [Strucure déportée : ] Les modules d'entrées et de sorties sont déportées proches des capteurs et actionneurs et communiquent avec l'automates à l'aide d'un BUS de terrain.
+\end{description}
+}
