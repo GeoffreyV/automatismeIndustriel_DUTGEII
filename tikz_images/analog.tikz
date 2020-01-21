@@ -1,4 +1,4 @@
 \begin{tikzpicture}[scale = 0.9]
 \draw [gray](0,0) grid (7,4);
-\draw [blue] plot [smooth, tension=1] coordinates { (0,0) (1,1) (2,3) (3,2) (4,0) (6,2) (7,2)};
+\draw [blue, line width = 2.5pt] plot [smooth, tension=1] coordinates { (0,0) (1,1) (2,3) (3,2) (4,0) (6,2) (7,2)};
 \end{tikzpicture}
