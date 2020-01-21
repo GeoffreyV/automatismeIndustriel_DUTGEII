@@ -1,0 +1,53 @@
+
+\section{Le cycle automate}
+\subsection{Introduction aux mémoires d'un automate}
+Un automate possède, comme n'importe quel système informatique, de la mémoire lui permettant de stocker et de traiter des données. En pratique, un automate possède plusieurs mémoires différentes ayant chacune une utilité propres.
+
+Dans un premier temps, nous allons considérer trois types de mémoires :
+\begin{description}
+  \item [Mémoire Entrées : ] Elle contient les informations correspondant à l'état des entrées de l'automate. \textbf{\color{red} Cette mémoire ne peut pas être modifiée par le programme ou l'opérateur.}
+  \item [Mémoire interne : ] Elle contient toutes les données utiles au fonctionnement et aux programmes de l'automate.
+  \item [Mémoire Sortie : ] Elle contient les informations correspondant à l'état des sorties.
+\end{description}
+\subsection{Description d'un cycle automate}
+
+L'exécution du programme d'un automate industriel se fait en une succession de cycles que l'on appelle \textbf{cycles automates}.
+
+Chaque cycle peut se décomposer en quatre étapes représentées sur la Figure~\ref{fig:cycleAutomate} et décrites ci-dessous. Ces quatre étapes se succèdent continuellement tant que l'automate n'est pas arrêté par l'opérateur ou par un incident externe.
+\begin{description}
+  \item[Traitement Interne : ] L'automate effectue des opérations de contrôle et met à jour certains paramètres systèmes (détection des passages en RUN / STOP , mises à jour des valeurs de l'horodateur, ...).
+  \item[Lecture des Entrées : ]  L'automate lit les entrées (de façon synchrone) et les recopie dans la mémoire image des entrées.
+  \item[Exécution du programme : ] L'automate exécute le programme instruction par instruction et écrit les sorties dans la mémoire image des sorties.
+  \item[Ecriture des sorties : ] L'automate bascule les différentes sorties (de façon synchrone) aux positions définies dans la mémoire image des sorties.
+\end{description}
+
+\begin{figure}[h!t]
+  \centering
+  \def\svgwidth{.4\textwidth}
+  \import{images/}{cycle_automate.pdf_tex}
+  \caption{Déroulement d'un cycle automate}
+  \label{fig:cycleAutomate}
+\end{figure}
+
+La Figure~\ref{fig:cycleAutomateCapteurToEntree} représente 5 capteurs et leur prise en compte dans la mémoire de l'automate. Pour chacun des capteurs, la prise en compte du passage à l'état 1 ou à l'état 0 ne se fait qu'à l'étape \textbf{I} du cycle automate.
+
+On constate notamment que si le signal observé est trop rapide par rapport au temps de scrutation (cycle automate), il pourrait ne pas être détecté par l'automate (c'est le cas du capteur 3 dans cet exemple). 
+
+
+
+
+\UPSTIaRetenir{Un cycle automate dure environ \SI{10}{ms} (de \SI{1}{ms} à \SI{100}{ms}) durant lesquelles le changement de l'état d'une entrée ne peut pas être pris en compte. Cette durée est appelée \textbf{Temps de scrutation}.}
+
+\UPSTIaRetenir{L'état des entrées et des sorties n'est mis à jour que lors de l'étape \textbf{Lecture des entrées} ou \textbf{Ecriture des sorties}, respectivement. }
+
+\begin{UPSTIactivite}
+  \UPSTIquestion{Compléter la Figure~\ref{fig:cycleAutomateCapteurToEntree} en dessinant le signal de la mémoire automate.}
+\end{UPSTIactivite}
+
+\begin{figure}[p]
+  \centering
+  \def\svgwidth{.9\textwidth}
+  \import{images/}{cycleAutomateTemporel.pdf_tex}
+  \caption{Déroulement d'un cycle automate}
+  \label{fig:cycleAutomateCapteurToEntree}
+\end{figure}
