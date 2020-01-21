@@ -12,11 +12,23 @@ Il existe trois familles de capteurs se différenciant par la nature du signal q
 
 \begin{description}
 	\item [Capteurs Analogiques : ] Le signal délivré est la traduction de la grandeur physique mesurée. Le signal en sortie est généralement sous la forme d'un courant ou d'une tension variable.
-		\begin{itemize}
-			\item Sonde de température
-			\item Capteur de luminosité
-			\item \dots
-		\end{itemize}
+
+	\vspace{6pt}
+	\begin{minipage}[c]{0.3\textwidth}
+	\begin{itemize}
+		\item Sonde de température
+		\item Capteur de luminosité
+		\item Microphone
+		\item Sonde de déformation
+		\item \dots
+	\end{itemize}
+	\end{minipage}
+	\begin{minipage}[c]{0.5\textwidth}
+	\begin{center}
+		\input{tikz/analog.tikz}
+	\end{center}
+	\end{minipage}
+
 
 	\item [Capteurs logiques (Tout Ou Rien - TOR) : ] Le signal ne peut prendre que deux valeurs (généralement deux niveaux de tension) représentant les états 0 et 1. Ces capteurs sont aussi appelés des \textit{détecteurs}.
 		\begin{itemize}
@@ -25,6 +37,9 @@ Il existe trois familles de capteurs se différenciant par la nature du signal q
 		\end{itemize}
 
 			\item[Capteurs numériques :] Le signal est codé au sein du capteur. Il est ensuite envoyé sous la forme d'un signal variant de façon discrète dans le temps.
+			\begin{center}
+				\input{tikz/numerique.tikz}
+			\end{center}
 \end{description}
 
 
