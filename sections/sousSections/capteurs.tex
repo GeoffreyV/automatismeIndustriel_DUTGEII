@@ -13,8 +13,6 @@ Il existe trois familles de capteurs se différenciant par la nature du signal q
 \begin{description}
 	\item [Capteurs Analogiques : ] Le signal délivré est la traduction de la grandeur physique mesurée. Le signal en sortie est généralement sous la forme d'un courant ou d'une tension variable.
 
-	\vspace{6pt}
-	\begin{minipage}[c]{0.3\textwidth}
 	\begin{itemize}
 		\item Sonde de température
 		\item Capteur de luminosité
@@ -22,27 +20,44 @@ Il existe trois familles de capteurs se différenciant par la nature du signal q
 		\item Sonde de déformation
 		\item \dots
 	\end{itemize}
-	\end{minipage}
-	\begin{minipage}[c]{0.5\textwidth}
-	\begin{center}
-		\input{tikz/analog.tikz}
-	\end{center}
-	\end{minipage}
-
 
 	\item [Capteurs logiques (Tout Ou Rien - TOR) : ] Le signal ne peut prendre que deux valeurs (généralement deux niveaux de tension) représentant les états 0 et 1. Ces capteurs sont aussi appelés des \textit{détecteurs}.
 		\begin{itemize}
 			\item Détecteur de proximité
 			\item Capteur fin de course de vérin
+			\item Détecteur infrarouge
+			\item \dots
 		\end{itemize}
 
 			\item[Capteurs numériques :] Le signal est codé au sein du capteur. Il est ensuite envoyé sous la forme d'un signal variant de façon discrète dans le temps.
-			\begin{center}
-				\input{tikz/numerique.tikz}
-			\end{center}
+			\begin{itemize}
+				\item Codeur d'un moteur
+				\item Capteur de température numérique
+				\item \dots
+			\end{itemize}
 \end{description}
 
+La Figure~\ref{fig:analogVsNum} rappelle la forme des signaux analogique et numériques
 
+\begin{figure}[ht]
+\centering
+\begin{subfigure}{0.49\textwidth}
+\centering
+	\input{tikz/analog.tikz}
+	\caption{Signal analogique}
+\end{subfigure}%
+%
+\begin{subfigure}{0.49\textwidth}
+\centering
+	\input{tikz/numerique.tikz}
+	\caption{Signal numérique}
+\end{subfigure}
+%
+	\caption{Rappel -- signal analogique et numérique}
+	\label{fig:analogVsNum}
+\end{figure}
+
+\pagebreak
 \begin{UPSTIactivite}
 \UPSTIquestion{De quel type (analogique, numérique ou logique) sont les capteurs inductif et optique ci-dessous ?}
 
