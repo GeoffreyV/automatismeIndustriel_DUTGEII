@@ -1,0 +1,9 @@
+\begin{tikzpicture}[circuit plc ladder, thick, x=\ladderskip, y=\ladderskip]
+  \draw(0,0) to [contact NC={info={a}}] ++ (1,0)
+    to [contact NC={info={b}}] ++ (1,0) -- ++(1,0)
+    to [coil={info={Sortie}}] + (1,0) coordinate(laddertopright);
+    \ladderrungend{2}
+    \draw let \p1=(laddertopright) in
+    (0,   \y1+0.7\ladderskip) -- (0,    \ladderskip)
+    (\x1, \y1+0.7\ladderskip) -- (\x1,  \ladderskip);
+\end{tikzpicture}

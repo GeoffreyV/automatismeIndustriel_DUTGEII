@@ -1,0 +1,3 @@
+\begin{tikzpicture}[circuit plc ladder,thick,x=\ladderskip,y=\ladderskip]
+  \draw(0,0) to [contact NO={info={a}}] ++ (1,0);
+\end{tikzpicture}

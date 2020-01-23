@@ -1,0 +1,68 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% E.Pinault-Bigeard - e.pinault-bigeard@upsti.fr
+% http://s2i.pinault-bigeard.com
+% CC BY-NC-SA 2.0 FR - http://creativecommons.org/licenses/by-nc-sa/2.0/fr/
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[11pt]{article}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Package UPSTI_Document
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{inputs/commands}
+
+%---------------------------------%
+% Paramètres du package
+%---------------------------------%
+
+% Version du document (pour la compilation)
+% 1: Document prof
+% 2: Document élève
+% 3: Document à publier
+\input{variables/documentVersion}
+
+% Variante
+%\newcommand{\UPSTIvariante}{2}
+
+\input{variables/infoDoc}
+
+% Référence au programme
+%\newcommand{\UPSTIprogramme}{\EPBComp \EPBCompP{B1-02}, \EPBCompP{B2-49}, \EPBCompS{B2-50}, \EPBCompS{B2-51}, \EPBCompP{C1-07}, \EPBCompP{C1-08}}
+
+% Si l'auteur n'est pas l'auteur par défaut
+%\renewcommand{\UPSTIauteur}{WWOOOOOOWW}
+
+% Si le document est réalisé au nom de l'équipe
+%\newcommand{\UPSTIdocumentCollegial}{1}
+
+% Source
+%\newcommand{\UPSTIsource}{UPSTI}
+
+% Version du document
+\newcommand{\UPSTInumeroVersion}{0.1}
+
+%-----------------------------------------------
+\UPSTIcompileVars		% "Compile" les variables
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\include{dirtree}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Début du document
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\input{ladder_diagrams/initLadder}
+
+\begin{document}
+\UPSTIbuildPage
+\section*{Introduction}
+Le logiciel de développement d'un API (Automate Programmable Industriel) est un logiciel permettant de configurer et de programmer l'API associé. Chaque constructeur d'API  impose son propre logiciel de développement.
+
+\begin{table}[ht]
+\centering
+	\input{tables/logiciel_par_constructeur}
+	\caption{Logiciel de développement pour chaque constructeur.}
+\end{table}
+
+\input{sections/sousSections/ladder.tex}
+
+\input{sections/projet_unity}
+
+\end{document}

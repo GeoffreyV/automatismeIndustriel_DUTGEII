@@ -1,0 +1,79 @@
+
+Le langage LADDER fut conçu dans les années 1970 pour faire passer les électrotechniciens de la saisie de schémas électriques de systèmes à relais  à la programmation.
+Il est donc simple et proche de la description de schémas électriques.
+On le réserve à la description de fonctions combinatoires ou à des calculs simples.
+
+Une ligne d'un programme LADDER est appelée réseau.
+
+Un réseau est composé de contacts, de bobine et/ou de blocs.
+
+\subsection{Réseaux LADDER simples}
+
+\subsubsection{Les contacts}
+
+Les contacts représentent des entrées logiques (TOR).
+
+\UPSTIaRetenir{Il existe deux types de contacts :
+\begin{description}
+  \item [$\begin{array}{l}\input{ladder_diagrams/ladderNOContact.tikz} \end{array}$] \textbf{Contact normalement ouvert} :
+  actif lorsque la variable associée est à l'état 1.
+  \begin{itemize}
+    \item [$\Rightarrow$] Il représente donc la variable $a$
+  \end{itemize}
+  \item [$\begin{array}{l}\input{ladder_diagrams/ladderNCContact.tikz} \end{array}$]  \textbf{Contact normalement fermé } actif lorsque la variable associée est à l'état 0.
+  \begin{itemize}
+    \item [$\Rightarrow$] Il représente donc la variable $\overline{a}$
+  \end{itemize}
+\end{description}
+}
+
+\subsubsection{Les bobines}
+
+Les bobines représentent les sorties logiques (TOR) de l'API.
+
+\UPSTIaRetenir{Une sortie S de l'automate est active lorsque la bobine associée $\begin{array}{l}\input{ladder_diagrams/bobine.tikz}\end{array}$ est active.}
+
+
+\subsubsection{Réseaux de base}
+
+La traduction en réseau LADDER de l'équation $S = a$ est donc représentée sur la figure \ref{fig:ladAtoS}. L'équation en réseau LADDER de l'équation $S = \overline{a}$ est représentée sur la figure~\ref{fig:ladABartoS}
+
+\begin{figure}[ht]
+  \begin{subfigure}[b]{.49\textwidth}
+  \centering
+    \input{ladder_diagrams/ladderAToS.tikz}
+    \caption{$S = a$}
+    \label{fig:ladAtoS}
+  \end{subfigure}
+  %
+  \begin{subfigure}[b]{.49\textwidth}
+  \centering
+    \input{ladder_diagrams/ladderABarToS.tikz}
+    \caption{$S = \overline{a}$}
+    \label{fig:ladABartoS}
+  \end{subfigure}
+
+  \caption{Réseaux LADDER de base}
+\end{figure}
+
+Comme dans un circuit électrique, il est possible de programmer des équation combinatoires en langage LADDER. Les fonctions \textbf{ET} et \textbf{OU} sont représentée sur la figure~\ref{fig:equaLogiques}
+
+\begin{figure}[ht]
+  \begin{subfigure}[b]{.49\textwidth}
+    \centering
+    \input{ladder_diagrams/ladCircuitET.tikz}
+    \caption{$S = a \text{ ET } b$}
+    \label{fig:aETb}
+  \end{subfigure}
+  %
+  \begin{subfigure}[b]{.49\textwidth}
+    \centering 
+    \input{ladder_diagrams/ladCircuitOU.tikz}
+    \caption{$S = a \text{ OU } b$}
+    \label{fig:aOUb}
+  \end{subfigure}
+  \caption{Equations logiques simples}
+  \label{fig:equaLogiques}
+\end{figure}
+
+\input{activites/equationLADDER}
