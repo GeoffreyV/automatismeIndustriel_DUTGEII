@@ -1,0 +1,65 @@
+
+\definecolor{cff9955}{RGB}{255,153,85}
+\definecolor{c80b3ff}{RGB}{128,179,255}
+\definecolor{c5fd38d}{RGB}{95,211,141}
+\definecolor{cff5555}{RGB}{255,85,85}
+
+
+\def \globalscale {6.000000}
+\begin{tikzpicture}[y=0.80pt, x=0.80pt, yscale=-\globalscale, xscale=\globalscale, inner sep=0pt, outer sep=0pt]
+\begin{scope}[shift={(-35.58469,-7.63787)}]
+  \begin{scope}[shift={(0,-0.8)}]
+    \path[draw=black,fill=cff9955,miter limit=4.00,line width=0.075pt,rounded corners=0.0000cm] (9.4618,21.2001) rectangle (39.0125,26.7783);
+
+
+
+    \path[fill=black,line width=0.056pt] (12,24.6521) node[above right] (text876) {Exécution du programme};
+
+
+
+  \end{scope}
+    \path[draw=black,fill=c80b3ff,miter limit=4.00,line width=0.075pt,rounded corners=0.0000cm] (9.4618,4.4406) rectangle (39.0125,10.0189);
+
+
+
+    \path[fill=black,line width=0.056pt] (13.9006,8.0649) node[above right] (text864) {Traitement Interne};
+
+
+
+  \begin{scope}[shift={(0,1.2)}]
+    \path[draw=black,fill=c5fd38d,miter limit=4.00,line width=0.075pt,rounded corners=0.0000cm] (9.4618,11.0879) rectangle (39.0125,16.6661);
+
+
+
+    \path[fill=black,line width=0.056pt] (14.0671,14.7569) node[above right] (text872) {Lecture des entrées};
+
+
+
+  \end{scope}
+      \path[draw=black,fill=cff5555,miter limit=4.00,line width=0.075pt,rounded corners=0.0000cm] (9.4618,28.5545) rectangle (39.0125,34.1327);
+
+
+
+      \path[fill=black,line width=0.056pt] (13.3646,32.3663) node[above right] (text880) {Écriture des sorties};
+
+
+
+    \path[draw=black,line join=miter,line cap=butt,miter limit=4.00,line width=0.075pt] (24.2355,10.0584) -- (24.2355,12.3212);
+
+
+
+    \path[draw=black,line join=miter,line cap=butt,miter limit=4.00,line width=0.075pt] (24.2355,18.1125) -- (24.2355,20.3754);
+
+
+
+    \path[draw=black,line join=miter,line cap=butt,miter limit=4.00,line width=0.075pt] (24.2355,26.1740) -- (24.2355,28.4369);
+
+
+
+    \path[->, draw=black,line join=miter,line cap=butt,miter limit=4.00,line width=0.075pt] (24.1846,34.1722) -- (24.1846,36.5765) -- (47.0962,36.5765) -- (47.0962,2.2797) -- (46.9548,2.0676) -- (24.2553,2.0676) -> (24.2553,4.3304) ;
+
+
+
+\end{scope}
+
+\end{tikzpicture}

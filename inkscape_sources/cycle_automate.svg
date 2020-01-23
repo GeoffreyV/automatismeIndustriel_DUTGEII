@@ -15,7 +15,10 @@
    version="1.1"
    id="svg8"
    inkscape:version="0.92.4 5da689c313, 2019-01-14"
-   sodipodi:docname="cycle_automate.svg">
+   sodipodi:docname="cycle_automate.svg"
+   inkscape:export-filename="/home/geoffreyv/Documents/professionnel/enseignement/pedagogie/supports/iut_cachan/dut/automatisme/poly/inkscape_sources/cycle_automate.png"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96">
   <defs
      id="defs2">
     <marker
@@ -148,14 +151,14 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.98994949"
-     inkscape:cx="169.17226"
+     inkscape:cx="-37.403936"
      inkscape:cy="261.10012"
      inkscape:document-units="mm"
      inkscape:current-layer="g977"
      showgrid="false"
      inkscape:window-width="1920"
-     inkscape:window-height="1051"
-     inkscape:window-x="1920"
+     inkscape:window-height="1006"
+     inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="1"
      fit-margin-top="0"
@@ -170,7 +173,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>

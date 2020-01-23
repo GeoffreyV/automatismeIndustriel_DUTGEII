@@ -64,22 +64,24 @@
     \put(0.95053808,1.14622098){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$t$\end{tabular}}}}%
     \put(0.01018371,1.25426816){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Temps de scrutation $\approx \SI{10}{ms}$\end{tabular}}}}%
     \put(0,0){\includegraphics[width=\unitlength,page=4]{cycleAutomateTemporel.pdf}}%
-    \put(0.95053808,1.00664078){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$t$\end{tabular}}}}%
+    \put(0.65256379,1.20711415){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}I\end{tabular}}}}%
     \put(0,0){\includegraphics[width=\unitlength,page=5]{cycleAutomateTemporel.pdf}}%
-    \put(0.95053808,0.92709841){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$t$\end{tabular}}}}%
+    \put(0.95053808,1.00664078){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$t$\end{tabular}}}}%
     \put(0,0){\includegraphics[width=\unitlength,page=6]{cycleAutomateTemporel.pdf}}%
-    \put(0.95053808,0.77318917){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$t$\end{tabular}}}}%
+    \put(0.95053808,0.92709841){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$t$\end{tabular}}}}%
     \put(0,0){\includegraphics[width=\unitlength,page=7]{cycleAutomateTemporel.pdf}}%
-    \put(0.95053808,0.69405861){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$t$\end{tabular}}}}%
+    \put(0.95053808,0.77318917){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$t$\end{tabular}}}}%
     \put(0,0){\includegraphics[width=\unitlength,page=8]{cycleAutomateTemporel.pdf}}%
-    \put(0.96664657,0.54074027){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$t$\end{tabular}}}}%
+    \put(0.95053808,0.69405861){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$t$\end{tabular}}}}%
     \put(0,0){\includegraphics[width=\unitlength,page=9]{cycleAutomateTemporel.pdf}}%
-    \put(0.96664657,0.45767317){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$t$\end{tabular}}}}%
+    \put(0.96664657,0.54074027){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$t$\end{tabular}}}}%
     \put(0,0){\includegraphics[width=\unitlength,page=10]{cycleAutomateTemporel.pdf}}%
-    \put(0.96664657,0.30790095){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$t$\end{tabular}}}}%
+    \put(0.96664657,0.45767317){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$t$\end{tabular}}}}%
     \put(0,0){\includegraphics[width=\unitlength,page=11]{cycleAutomateTemporel.pdf}}%
-    \put(0.96664657,0.22483385){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$t$\end{tabular}}}}%
+    \put(0.96664657,0.30790095){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$t$\end{tabular}}}}%
     \put(0,0){\includegraphics[width=\unitlength,page=12]{cycleAutomateTemporel.pdf}}%
+    \put(0.96664657,0.22483385){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$t$\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=13]{cycleAutomateTemporel.pdf}}%
     \put(0.00654637,1.06613834){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.11652485\unitlength}\raggedright Capteur 1\end{minipage}}}%
     \put(0.0053237,0.99250912){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.28280183\unitlength}\raggedright \end{minipage}}}%
     \put(0.00916487,0.96791692){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Mémoire API Capt 1\end{tabular}}}}%
@@ -89,12 +91,13 @@
     \put(0.01077588,0.50478483){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Mémoire API Capt 3\end{tabular}}}}%
     \put(0.00934008,0.36471948){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.11652485\unitlength}\raggedright Capteur 4\end{minipage}}}%
     \put(0.01195857,0.26649805){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Mémoire API Capt 4\end{tabular}}}}%
-    \put(0,0){\includegraphics[width=\unitlength,page=13]{cycleAutomateTemporel.pdf}}%
-    \put(0.96664657,0.08626654){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$t$\end{tabular}}}}%
     \put(0,0){\includegraphics[width=\unitlength,page=14]{cycleAutomateTemporel.pdf}}%
+    \put(0.96664657,0.08626654){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$t$\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=15]{cycleAutomateTemporel.pdf}}%
     \put(0.96664657,0.00319944){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$t$\end{tabular}}}}%
     \put(-0.00007283,0.14083476){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.11652485\unitlength}\raggedright Capteur 5\end{minipage}}}%
     \put(0.00254561,0.04261326){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Mémoire API Capt 5\end{tabular}}}}%
     \put(0.0342543,0.01203523){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}A compléter\end{tabular}}}}%
+    \put(0.36079055,1.20769795){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}I\end{tabular}}}}%
   \end{picture}%
 \endgroup%
