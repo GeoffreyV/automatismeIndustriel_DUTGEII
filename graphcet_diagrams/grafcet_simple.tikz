@@ -1,0 +1,13 @@
+\begin{tikzpicture}
+\EtapeInit[0,0]{100}
+\Transition[VX100]{100}
+\Etape[VT100]{110}
+\Transition{110}
+\Etape[VT110]{120}
+\Transition[VX120]{120}
+\LienRetour{T120}{X100}
+\Recept{T100}{$dcy \cdot a_0$}
+\ActionX{X110}{Sortir Noyau}
+\Recept{T110}{condition}\ActionX{X120}{Rentrer Noyau}
+\Recept{T120}{$a_0$}
+\end{tikzpicture}
