@@ -1,0 +1,21 @@
+\begin{tikzpicture}
+  \Etape{3}
+  \Transition{3}
+  \DivET{T3}{-6/br1,7/br3,20/br2}
+  \Graphe[Vbr1]{
+  21/Remplir cuve/ cuver remplie
+  }
+  \Etape{24}
+  \Etape[Vbr2]{31}
+  \SequenceEE[Vbr3]{11,12}{13}
+  \ConvET[-7]{X13}{X24,X31}{b40}
+  \Transition[b40]{40}
+  \Etape{41}
+  \ActionRecept{
+  11/Sortir tige verin/tige sortie,
+  12/Rentrer tige verin/tige rentrée
+  }
+  \ActionX{X31}{Allumer voyant}
+  \Recept{T3}{$marche$}
+  \Recept{T40}{$\underline1$}
+\end{tikzpicture}

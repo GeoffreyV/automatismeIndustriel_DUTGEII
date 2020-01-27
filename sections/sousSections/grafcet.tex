@@ -99,6 +99,72 @@ On peut représenter l'étape actuellement active dans un grafcet à l'aide d'un
 \subsection{Transitions}
 
 Une transition est \textbf{toujours} placée entre deux actions. Ce sont les transitions qui décrivent la façon de passer d'une action à une autre.
-Une transition est associée à une \textbf{réceptivité}.
+Une transition est associée à une \textbf{réceptivité} (Voir Figure~\ref{fig:transition}).
 
 \UPSTIaRetenir{Une transition sera franchie si et seulement si l'étape précédente est active ET la réceptivité associée est vérifiée.}
+
+\begin{figure}[ht]
+  \centering
+  \begin{subfigure}[b]{.48\textwidth}
+    \centering
+      \begin{tikzpicture}
+        \Transition[0,0]{110}
+      \end{tikzpicture}
+    \caption{Une transition}
+    \label{fig:transition}
+  \end{subfigure}
+  \begin{subfigure}[b]{.48\textwidth}
+    \centering
+      \begin{tikzpicture}
+        \Transition[0,0]{110}
+        \Recept{T110}{$dcy \cdot a_0$}
+      \end{tikzpicture}
+    \caption{Une transition et sa réceptivité associée}
+    \label{fig:transitionEtRecept}
+  \end{subfigure}
+  \caption{Transitions et Réceptivité}
+  \label{fig:transition}
+\end{figure}
+
+\subsection{Saut d'étapes et reprise de séquence}
+Le saut d'étapes permet de sauter une ou plusieurs étapes lorsque les actions associées sont inutiles à réaliser, La reprise de séquence (ou boucle) permet de reprendre, une ou plusieurs fois, une séquence tant qu'une condition n'est pas obtenue.
+
+
+\subsection{Divergences et Convergences}
+\subsubsection{Divergence/Convergence en OU}
+On dit qu'il y a Aiguillage ou divergence en OU lorsque le grafcet se décompose en deux ou plusieurs séquences selon un choix conditionnel. Comme la divergence en OU on rencontre aussi la convergence en OU. On dit qu'il y a convergence en OU, lorsque deux ou plusieurs séquences du grafcet converge vers une seule séquence.
+
+ Un exemple est donnée en Figure~\ref{fig:divOU}.
+
+\UPSTIaRetenir{\begin{itemize}
+  \item Une convergence en \textbf{OU} commence \textbf{toujours} par une transition sur chacune de ses branches.
+  \item Une convergence en \textbf{OU} se termine \textbf{toujours} par une transition sur chacune de ses branches.
+  \item Les conditions d'une divergence doivent être exclusives.
+\end{itemize}}
+
+\begin{figure}[ht]
+  \centering
+  \input{grafcet_diagrams/divergenceOU.tikz}
+  \caption{Exemple de divergence en \textbf{OU}. Une seule des branches est parcourrue.}
+  \label{fig:divOU}
+\end{figure}
+
+
+\subsubsection{Divergence en ET}
+Au contraire de l'aiguillage où ne peut se dérouler qu'une seule activité à la fois, On dit qu'on se trouve en présence d'un parallélisme structurel, si plusieurs activités indépendantes pouvant se dérouler en parallèle. Le début d'une divergence en ET et la fin d'une convergence en ET d'un parallélisme structurel sont représentés par deux traits parallèles. Un exemple est donnée en Figure~\ref{fig:divET}.
+
+\UPSTIremarque{La dernière étape d'une divergence en ET est souvent vide pour attendre les autres branches.}
+\begin{figure}
+  \centering
+  \input{grafcet_diagrams/divergenceET.tikz}
+  \caption{Exemple de divergence en \textbf{ET}. Les trois branches sont parcourrue simultanéement.}
+  \label{fig:divET}
+\end{figure}
+
+\subsection{Rêgles de conception}
+\UPSTIaRetenir{\begin{itemize}
+  \item Les actions ne concernent que les \textbf{actionneurs} ou des variables internes.
+  \item Les réceptivités ne concernent que les capteurs ou des variables internes
+  \item Une étape est \textbf{toujours} suivie d'une transition
+  \item Une transition est \textbf{toujours} suivie d'une étape.
+\end{itemize}}

@@ -1,0 +1,15 @@
+\begin{tikzpicture}
+  \Etape[0,0]{1}
+  \DivOU{X1}{-5/L1a,3/L1b,11/L1c}
+  \SequenceTT[L1a]{1a}{11}
+  \SequenceTT[L1b]{1b}{21,22,23}
+  \SequenceTT[L1c]{1c}{31,32}
+  \ConvOU[-3]{T23}{T32,T11}{L2}
+  \Etape[L2]{2}
+  \DecaleNoeudy[-3]{VX2}{VX2}
+  \DecaleNoeudy[-3]{NoeudGraf}{NoeudGraf}
+  \Actions{1/A1,11/A11,21/A11,22/A22,
+  23/A23,31/A31,2/A2}
+  \Recepts{1a/r1a,1b/r1b,1c/r1c,11/r11,
+  21/r21,22/r22,23/r23,31/r31,32/r32}
+\end{tikzpicture}
