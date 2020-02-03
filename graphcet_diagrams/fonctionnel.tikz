@@ -6,7 +6,7 @@
 \Etape[VT110]{120}
 \Transition[VX120]{120}
 \LienRetour{T120}{X100}
-\Recept{T100}{ordreMarche}
+\Recept{T100}{Ordre de marche}
 \ActionX{X110}{Sortir Noyau}
 \Recept{T110}{noyau sorti}\ActionX{X120}{Rentrer Noyau}
 \Recept{T120}{$a_0$}
