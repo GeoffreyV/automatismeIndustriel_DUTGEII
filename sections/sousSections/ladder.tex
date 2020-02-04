@@ -42,27 +42,23 @@ Les bobines représentent les sorties logiques (TOR) de l'API.
 
 La traduction en réseau LADDER de l'équation $S = a$ est donc représentée sur la figure \ref{fig:ladAtoS}. L'équation en réseau LADDER de l'équation $S = \overline{a}$ est représentée sur la figure~\ref{fig:ladABartoS}
 
-\begin{figure}[ht]
-  \begin{subfigure}[b]{.49\textwidth}
-  \centering
-    \input{ladder_diagrams/ladderAToS.tikz}
-    \caption{$S = a$}
-    \label{fig:ladAtoS}
-  \end{subfigure}
-  %
-  \begin{subfigure}[b]{.49\textwidth}
-  \centering
-    \input{ladder_diagrams/ladderABarToS.tikz}
-    \caption{$S = \overline{a}$}
-    \label{fig:ladABartoS}
-  \end{subfigure}
-
-  \caption{Réseaux LADDER de base}
-\end{figure}
-
 Comme dans un circuit électrique, il est possible de programmer des équation combinatoires en langage LADDER. Les fonctions \textbf{ET} et \textbf{OU} sont représentée sur la figure~\ref{fig:equaLogiques}
 
 \begin{figure}[ht]
+\begin{subfigure}[b]{.49\textwidth}
+\centering
+  \input{ladder_diagrams/ladderAToS.tikz}
+  \caption{$S = a$}
+  \label{fig:ladAtoS}
+\end{subfigure}
+%
+\begin{subfigure}[b]{.49\textwidth}
+\centering
+  \input{ladder_diagrams/ladderABarToS.tikz}
+  \caption{$S = \overline{a}$}
+  \label{fig:ladABartoS}
+\end{subfigure}
+
   \begin{subfigure}[b]{.49\textwidth}
     \centering
     \input{ladder_diagrams/ladCircuitET.tikz}
