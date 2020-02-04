@@ -17,14 +17,14 @@ Une étape est représentée par un carré comportant un numéro (Figure~\ref{fi
 Il est également possible d'ajouter une condition à une action (Figure~\ref{fig:etapeActionCond}).
 
 \UPSTIaRetenir{\begin{itemize}
-  \item Une action associée à une étape n'est effectuée que lorsque l'action associée est active.
-  \item Une action conditionnelle est effectuée lorsque l'action est active et que la condition associée est vérifiée.
+  \item Une action associée à une étape n'est effectuée que lorsque cette étape est active.
+  \item Une action conditionnelle est effectuée lorsque \textbf{l'étape est active et que la condition associée est vérifiée}.
 \end{itemize}}
 
 Il également possible d'effectuer une action qu'au moment de l'activation d'une étape (Figure~\ref{fig:etapeActivation}). Cela est particulièrement utile pour incrémenter un compteur.
-En effet, sans cela l'action \textit{compteur = compteur + 1} serait effectuée durant toute la durée de l'action associée. Cela incrémenterait le compteur à chaque cycle automate donc toutes les \SI{10}{ms} approximativement.
+En effet, sans cela l'action \textit{compteur = compteur + 1} serait effectuée durant toute la durée de l'action associée. Cela incrémenterait le compteur à chaque cycle automate donc approximativement toutes les \SI{10}{ms}.
 
-On peut représenter l'étape actuellement active dans un grafcet à l'aide d'une étoile comme illustré sur la Figure~\ref{fig:etapeActive}.
+Pour un grafcet en cours d'exécution, on peut représenter l'étape active dans un grafcet à l'aide d'une étoile comme illustré sur la Figure~\ref{fig:etapeActive}.
 
 \begin{figure}[ht]
 \centering
@@ -132,13 +132,13 @@ Le saut d'étapes permet de sauter une ou plusieurs étapes lorsque les actions 
 
 \subsection{Divergences et Convergences}
 \subsubsection{Divergence/Convergence en OU}
-On dit qu'il y a Aiguillage ou divergence en OU lorsque le grafcet se décompose en deux ou plusieurs séquences selon un choix conditionnel. Comme la divergence en OU on rencontre aussi la convergence en OU. On dit qu'il y a convergence en OU, lorsque deux ou plusieurs séquences du grafcet converge vers une seule séquence.
+On dit qu'il y a Aiguillage ou \textbf{divergence en OU} lorsque le grafcet se décompose en deux ou plusieurs séquences selon un choix conditionnel. Après une divergence en OU on rencontre souvent une \textbf{convergence en OU}. On dit qu'il y a convergence en OU, lorsque deux ou plusieurs séquences du grafcet converge vers une seule séquence.
 
  Un exemple est donnée en Figure~\ref{fig:divOU}.
 
 \UPSTIaRetenir{\begin{itemize}
-  \item Une convergence en \textbf{OU} commence \textbf{toujours} par une transition sur chacune de ses branches.
-  \item Une convergence en \textbf{OU} se termine \textbf{toujours} par une transition sur chacune de ses branches.
+  \item Une divergence en \textbf{OU} est \textbf{toujours} suivie d'une transition sur chacune de ses branches.
+  \item Une convergence en \textbf{OU} est \textbf{toujours} précédée d'une transition sur chacune de ses branches.
   \item Les conditions d'une divergence doivent être exclusives.
 \end{itemize}}
 
@@ -151,7 +151,7 @@ On dit qu'il y a Aiguillage ou divergence en OU lorsque le grafcet se décompose
 
 
 \subsubsection{Divergence en ET}
-Au contraire de l'aiguillage où ne peut se dérouler qu'une seule activité à la fois, On dit qu'on se trouve en présence d'un parallélisme structurel, si plusieurs activités indépendantes pouvant se dérouler en parallèle. Le début d'une divergence en ET et la fin d'une convergence en ET d'un parallélisme structurel sont représentés par deux traits parallèles. Un exemple est donnée en Figure~\ref{fig:divET}.
+Au contraire de l'aiguillage, où ne peut se dérouler qu'une seule activité à la fois, on dit qu'on se trouve en présence d'un parallélisme structurel (\textbf{divergence en ET}), si plusieurs activités indépendantes pouvent se dérouler en parallèle. Un parallélisme structurel commence par une divergence en ET et termine par une convergence en ET. Celles-ci sont représentées par deux traits parallèles. Un exemple est donnée en Figure~\ref{fig:divET}.
 
 \UPSTIremarque{La dernière étape d'une divergence en ET est souvent vide pour attendre les autres branches.}
 \begin{figure}
@@ -172,11 +172,11 @@ Au contraire de l'aiguillage où ne peut se dérouler qu'une seule activité à 
 \subsection{Deux niveaux de GRAFCET}
 On peut écrire les grafcet d'un point de vue fonctionnel ou d'un point de vue opérationnel. Ces deux points de vues sont décrits ci-dessous et illustrés en Figure~\ref{fig:fonctionnelVsOperationnel}.
 \subsubsection{Niveau fonctionnel}
-Ce grafcet utilise des mots du cahier des charges. C'est la première étape d'élaboration d'un programme. Il est destiné à être compris par tous les collaborateur d'un projet. Ce sont donc des verbes qui sont utilisés pour décrire les actions d'une étape.
+Ce grafcet utilise des mots du cahier des charges. C'est la première étape d'élaboration d'un programme. Il est destiné à être compris par tous les collaborateurs d'un projet. Ce sont donc des verbes qui sont utilisés pour décrire les actions d'une étape.
 \subsubsection{Niveau opérationnel}
-Ce niveau de grafcet sert à la programmation de l'automate. C'est celui qui sera retranscrit dans le logiciel de programmation et envoyé à l'automate. Il est souvent moins lisible que le grafcet fonctionnel et est destiné aux intervenant sur la partie opérative.
+Ce niveau de grafcet sert à la programmation de l'automate. C'est celui qui sera retranscrit dans le logiciel de programmation et envoyé à l'automate. Il est souvent moins lisible que le grafcet fonctionnel et est destiné aux intervenants sur la partie opérative.
 
-Ce grafcet contient le nom des variables associées aux entrées (pour les réceptivités) et aux sorties (pour les actions) de l'automate.
+Ce grafcet est décrit à l'aide des noms de variables associées aux entrées (pour les réceptivités) et aux sorties (pour les actions) de l'automate.
 
 
 \begin{figure}
@@ -189,6 +189,6 @@ Ce grafcet contient le nom des variables associées aux entrées (pour les réce
     \input{grafcet_diagrams/operationnel.tikz}
     \caption{Opérationnel}
   \end{subfigure}
-  \label{fig:fonctionnelVsOperationnel}
   \caption{Grafcets fonctionnel et opérationnel}
+  \label{fig:fonctionnelVsOperationnel}
 \end{figure}
