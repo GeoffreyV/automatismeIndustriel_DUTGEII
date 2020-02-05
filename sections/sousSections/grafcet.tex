@@ -170,10 +170,10 @@ Au contraire de l'aiguillage, où ne peut se dérouler qu'une seule activité à
   \end{itemize}}
 
 \subsection{Deux niveaux de GRAFCET}
-On peut écrire les grafcet d'un point de vue fonctionnel ou d'un point de vue opérationnel. Ces deux points de vues sont décrits ci-dessous et illustrés en Figure~\ref{fig:fonctionnelVsOperationnel}.
-\subsubsection{Niveau fonctionnel}
+On peut écrire les grafcet d'un point de vue fonctionnel ou d'un point de vue opérationnel. Ces deux points de vue sont décrits ci-dessous et illustrés en Figure~\ref{fig:fonctionnelVsOperationnel}.
+\subsubsection{Niveau fonctionnel (Fig~\ref{fig:grafcetFonct})}
 Ce grafcet utilise des mots du cahier des charges. C'est la première étape d'élaboration d'un programme. Il est destiné à être compris par tous les collaborateurs d'un projet. Ce sont donc des verbes qui sont utilisés pour décrire les actions d'une étape.
-\subsubsection{Niveau opérationnel}
+\subsubsection{Niveau opérationnel~\ref{fig:operationnel}}
 Ce niveau de grafcet sert à la programmation de l'automate. C'est celui qui sera retranscrit dans le logiciel de programmation et envoyé à l'automate. Il est souvent moins lisible que le grafcet fonctionnel et est destiné aux intervenants sur la partie opérative.
 
 Ce grafcet est décrit à l'aide des noms de variables associées aux entrées (pour les réceptivités) et aux sorties (pour les actions) de l'automate.
@@ -184,10 +184,12 @@ Ce grafcet est décrit à l'aide des noms de variables associées aux entrées (
   \begin{subfigure}[b]{.48\textwidth}
     \input{grafcet_diagrams/fonctionnel.tikz}
     \caption{Fonctionnel}
+    \label{fig:grafcetFonct}
   \end{subfigure}
   \begin{subfigure}[b]{.48\textwidth}
     \input{grafcet_diagrams/operationnel.tikz}
     \caption{Opérationnel}
+    \label{fig:operationnel}
   \end{subfigure}
   \caption{Grafcets fonctionnel et opérationnel}
   \label{fig:fonctionnelVsOperationnel}

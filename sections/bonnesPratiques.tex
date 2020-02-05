@@ -1,4 +1,14 @@
 \section{Bonnes pratiques}
-  De nos jours, les constructeurs préconisent d'utiliser le texte structuré pour programmer les grafcets. De plus, il est fortement conseillé de séparer la structure du programme de l'état des actionneurs.
+  Il est fortement conseillé de séparer la structure du programme de l'état des actionneurs.
 
-  Cela signifie que vous devrez créer un grafcet sans les actions associées (en SFC ou en ST selon les TPs). Une tâche à part gérera les actions. 
+  Cela signifie que vous devrez créer un grafcet sans les actions associées (en SFC ou en ST selon les TPs). Une tâche à part gérera les actions.
+
+Un exemple du fichier action associé au grafcet de la figure~\ref{fig:grafcetSFC-ST} est donné ci-dessous (Figure~\ref{fig:actions}). Dans ce code, on trouve deux écritures possible pour un même comportement.
+
+L'accès à l'état (actif ou non) d'un grafcet codé en SFC dépend des logiciels. La programmation de grafcet sera vue dans les différents TPs sur les parties opératives.
+
+\begin{figure}[ht]
+  \inputminted{C}{texteStructure/actions.c}
+  \caption{Fichier actions associé au grafcet de la Figure~\ref{fig:grafcetSFC-ST}}
+  \label{fig:actions}
+\end{figure}
