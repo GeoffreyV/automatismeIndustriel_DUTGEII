@@ -1,43 +1,158 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Package UPSTI_Document
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\usepackage{subcaption}
+%\usepackage{subcaption}
+%\usepackage[usenames, svgnames, dvipsnames]{xcolor}
+
 \usepackage[usenames, svgnames, dvipsnames]{xcolor}
 \usepackage{UPSTI_Document}
-\usepackage{pgfplots}
-\usepackage{import}
-\definecolor{darkspringgreen}{rgb}{0.09, 0.45, 0.27}
-
-\newcommandx*{\dessinRepereFigGeo}[5][1=\vx{},2=\vy{},3=\vz{},4=,5=0]
-	{
-		\draw [->,very thick] (0,0) -- (1,0) ;
-		\draw [->,very thick] (0,0) -- (0,1) ;
-    \fill[white] (0,0) circle (0.13);
-    \draw [->,very thick] (0,0) circle (0.13);
-    \ifnumequal{#5}{0} {% z vers nous
-      \fill[black] (0,0) circle (0.03);
-      \draw [->,thick] (0,0) circle (0.04);
-    }{% z vers la feuille
-  		\begin{scope} [rotate=45]
-  			\draw [-,thick] (0,-0.12) -- (0,0.12) ;
-  			\draw [-,thick] (-0.12,0) -- (0.12,0) ;
-  		\end{scope}
-    }
-		\draw [anchor=north west] (1.1,0) node {${#1}$};
-		\draw [anchor=south west] (0,1.1) node {${#2}$};
-		\draw [anchor=north east] (-0.1,0) node {${#3}$};
-		\draw [anchor=north west] (-0.1,-0.1) node {${#4}$};
-	}
-
-	\usepackage{array}
-	\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
-	\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
-	\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
-
-	\usepackage{pifont}% http://ctan.org/pkg/pifont
+\usepackage{subcaption}
 \newcommand{\cmark}{\color{green}\ding{51}}%
 \newcommand{\xmark}{\color{red}\ding{55}}%
 \newcommand{\fmark}{\ding{229}}%
 \newcommand{\itemc}{\item[\cmark]}%
 \newcommand{\itemx}{\item[\xmark]}%
 \newcommand{\itemf}{\item[\fmark]}%
+
+\RequirePackage{multicol}
+%\usepackage{pgfplots}
+%\definecolor{darkspringgreen}{rgb}{0.09, 0.45, 0.27}
+%
+% \newcommandx*{\dessinRepereFigGeo}[5][1=\vx{},2=\vy{},3=\vz{},4=,5=0]
+% 	{
+% 		\draw [->,very thick] (0,0) -- (1,0) ;
+% 		\draw [->,very thick] (0,0) -- (0,1) ;
+%     \fill[white] (0,0) circle (0.13);
+%     \draw [->,very thick] (0,0) circle (0.13);
+%     \ifnumequal{#5}{0} {% z vers nous
+%       \fill[black] (0,0) circle (0.03);
+%       \draw [->,thick] (0,0) circle (0.04);
+%     }{% z vers la feuille
+%   		\begin{scope} [rotate=45]
+%   			\draw [-,thick] (0,-0.12) -- (0,0.12) ;
+%   			\draw [-,thick] (-0.12,0) -- (0.12,0) ;
+%   		\end{scope}
+%     }
+% 		\draw [anchor=north west] (1.1,0) node {${#1}$};
+% 		\draw [anchor=south west] (0,1.1) node {${#2}$};
+% 		\draw [anchor=north east] (-0.1,0) node {${#3}$};
+% 		\draw [anchor=north west] (-0.1,-0.1) node {${#4}$};
+% 	}
+
+	% \usepackage{array}
+	% \newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+	% \newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+	% \newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+
+\newcommand{\AMCenTeteNomPrenom}[1][student]{
+  % Champ nom étudiant
+  \noindent%
+  \begin{minipage}[c]{.45\linewidth}
+    \vspace{-1.1ex}
+    \champnom{\fbox{
+    \begin{minipage}[c]{\linewidth}
+      \vspace{2.15ex}
+      NOM : \dotfill\par
+      %\vspace{1.5ex}
+      %Prénom : \dotfill\par
+      \vspace{1.5ex}
+    \end{minipage}%
+    }}%
+  \end{minipage}%
+  \hfill
+  % Zone de saisie code étudiant
+  \begin{minipage}[c]{.9\linewidth}
+      %\AMCcodeGridInt{#1}{2}
+    \AMCcodeH{#1}{2}
+  \end{minipage}%
+}
+
+
+\newcommand\evaluationProf[1][1]{
+\def\max{#1}
+  \textit{(#1 pt(s))}
+  \bareme{default.GRAD=0, formula=\max*GRAD/5, MAX=\max}
+  \AMCOpen{lineup=true}%annotate=FALSE,framerule=0pt,dots=FALSE,lines=0}
+  {%
+  \wrongchoice[0]{0}\scoring{0}
+  \wrongchoice[1]{1}\scoring{set.GRAD=1}
+  \wrongchoice[2]{2}\scoring{set.GRAD=2}
+  \wrongchoice[3]{3}\scoring{set.GRAD=3}
+  \wrongchoice[4]{4}\scoring{set.GRAD=4}
+  \correctchoice[5]{5}\scoring{set.GRAD=5}}%
+}
+
+\newcommand\checkProf[1][1]{
+\def\max{#1}
+  \textit{(#1 pt(s))}
+  \bareme{default.GRAD=0, formula=\max*GRAD, MAX=\max}
+  \AMCOpen{lineup=true}%annotate=FALSE,framerule=0pt,dots=FALSE,lines=0}
+  {
+  \wrongchoice[0]{0}\scoring{0}
+  \correctchoice[1]{1}\scoring{set.GRAD=1}}
+}
+
+\newcommand{\checkProfQuestion}[3]{
+\begin{question}{#1}
+  #2
+  \checkProf[#3]
+\end{question}
+}
+
+
+\newcommand{\notationProf}[1]{
+\def\max{#1}
+  \textit{(#1 pt(s))}
+  \bareme{default.UN=0, default.DEUX=0, default.QUATRE=0, default.HUIT=0, formula=UN + DEUX +QUATRE +HUIT, MAX=\max}
+  \AMCOpen{lineup=true}%annotate=FALSE,framerule=0pt,dots=FALSE,lines=0}
+  {
+  \wrongchoice[0]{0}\scoring{0}
+  \correctchoice[1]{1}\scoring{set.UN=1}
+  \correctchoice[2]{2}\scoring{set.DEUX=2}
+  \correctchoice[4]{4}\scoring{set.QUATRE=4}
+  \correctchoice[8]{8}\scoring{set.HUIT=8}
+  }
+}
+\newcommand\notationProfLigne[2]{
+\def\max{#1}
+  \textit{(#1 pt(s))}
+  \bareme{default.UN=0, default.DEUX=0, default.QUATRE=0, default.HUIT=0, formula=UN + DEUX +QUATRE +HUIT, MAX=\max}
+  \AMCOpen{lines=#2,dots=false}%annotate=FALSE,framerule=0pt,dots=FALSE,lines=0}
+  {
+  \wrongchoice[0]{0}\scoring{0}
+  \correctchoice[1]{1}\scoring{set.UN=1}
+  \correctchoice[2]{2}\scoring{set.DEUX=2}
+  \correctchoice[4]{4}\scoring{set.QUATRE=4}
+  \correctchoice[8]{8}\scoring{set.HUIT=8}
+  }
+}
+
+
+\newcommand\evaluationProfLignes[3][]{
+\def\max{#2}
+  \textit{(#2 pt(s))}
+  \bareme{default.GRAD=0, formula=\max*GRAD/5, MAX=\max}
+  \AMCOpen{lines=#3,dots=false,answer=#1}%annotate=FALSE,framerule=0pt,dots=FALSE,lines=0}
+  {
+  \wrongchoice[0]{0}\scoring{0}
+  \wrongchoice[1]{1}\scoring{set.GRAD=1}
+  \wrongchoice[2]{2}\scoring{set.GRAD=2}
+  \wrongchoice[3]{3}\scoring{set.GRAD=3}
+  \wrongchoice[4]{4}\scoring{set.GRAD=4}
+  \correctchoice[5]{5}\scoring{set.GRAD=5}}
+}
+
+\newcommand{\test}[1]{#1}
+\newcommand{\evaluationQuestion}[3]{%
+\begin{question}{#1}%
+  #2%
+  \evaluationProf[#3]%
+\end{question}
+}%
+
+\newcommand{\notationQuestion}[3]{%
+\begin{questionmult}{#1}%
+  #2%
+  \notationProf{#3}%
+\end{questionmult}%
+}
