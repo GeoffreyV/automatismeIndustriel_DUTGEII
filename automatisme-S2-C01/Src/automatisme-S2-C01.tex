@@ -3,10 +3,12 @@
 % http://s2i.pinault-bigeard.com
 % CC BY-NC-SA 2.0 FR - http://creativecommons.org/licenses/by-nc-sa/2.0/fr/
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\documentclass[11pt, multicol]{article}
+\documentclass[11pt]{article}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Package UPSTI_Document
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{import}
 \input{inputs/commands}
 
 %---------------------------------%
@@ -18,7 +20,6 @@
 % 2: Document élève
 % 3: Document à publier
 \input{variables/documentVersion}
-
 \input{variables/infoDoc}
 
 % Référence au programme
@@ -34,11 +35,17 @@
 \newcommand{\UPSTIsource}{A. Juton, J. Deprez, J. Maillefert, G. Vaquette}
 
 % Version du document
-\newcommand{\UPSTInumeroVersion}{1.1}
+\newcommand{\UPSTInumeroVersion}{0.1}
 
 %-----------------------------------------------
 \UPSTIcompileVars		% "Compile" les variables
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% Titre
+%\newcommand{\UPSTItitrePreambule}{Automatisme industriel}
+\newcommand{\UPSTItitre}{Sructure d'un automate industriel}
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -93,7 +100,7 @@ Les acteurs les plus importants du domaine sont :
 \input{sections/structure_automate}
 \input{sections/sousSections/bilan}
 
-\input{sections/cycleAutomate}
+%\input{sections/cycleAutomate}
 
 
 \end{document}

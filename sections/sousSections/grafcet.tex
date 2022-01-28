@@ -97,7 +97,7 @@ Pour un grafcet en cours d'exécution, on peut représenter l'étape active dans
 
 
 \subsection{Transitions}
-
+\subsubsection{Généralités}
 Une transition est \textbf{toujours} placée entre deux actions. Ce sont les transitions qui décrivent la façon de passer d'une action à une autre.
 Une transition est associée à une \textbf{réceptivité} (Voir Figure~\ref{fig:transition}).
 
@@ -125,7 +125,60 @@ Une transition est associée à une \textbf{réceptivité} (Voir Figure~\ref{fig
   \caption{Transitions et Réceptivité}
   %\label{fig:transitionEtReceptivite}
 \end{figure}
+\subsubsection{Différents types de transition}
+\begin{figure}
+\centering
+    \begin{subfigure}[b]{.4\textwidth}
+      \centering
+        \begin{tikzpicture}
+          \Transition[0,0]{110}
+          \Recept{T110}{$a + \overline{b}$}
+        \end{tikzpicture}
+        \vspace{-30pt}
+      \caption{Une combinaison (OU,ET,etc.)}
+      \label{fig:transitionCombi}
+    \end{subfigure}
+    \begin{subfigure}[b]{.4\textwidth}
+      \centering
+        \begin{tikzpicture}
+          \Transition[0,0]{110}
+          \Recept{T110}{$\uparrow a$}
+        \end{tikzpicture}\vspace{-30pt}
+      \caption{Front montant}
+      \label{fig:transitionFrontMontant}
+    \end{subfigure}
+\vspace*{10pt}
 
+    \begin{subfigure}[b]{.3\textwidth}
+      \centering
+        \begin{tikzpicture}
+          \Transition[0,0]{110}
+          \Recept{T110}{$1$}
+        \end{tikzpicture}\vspace{-30pt}
+      \caption{Toujours \textbf{vraie}}
+      \label{fig:transitionVraie}
+    \end{subfigure}
+    \begin{subfigure}[b]{.3\textwidth}
+      \centering
+        \begin{tikzpicture}
+          \Transition[0,0]{110}
+          \Recept{T110}{$a > 2$}
+        \end{tikzpicture}\vspace{-30pt}
+      \caption{Comparaison}
+      \label{fig:transitionComparaison}
+    \end{subfigure}
+    \begin{subfigure}[b]{.3\textwidth}
+      \centering
+        \begin{tikzpicture}
+          \Transition[0,0]{110}
+          \Recept{T110}{$T/X110/5s$}
+        \end{tikzpicture}\vspace{-30pt}
+      \caption{Temporisation}
+      \label{fig:transitionFrontMontant}
+    \end{subfigure}
+  \caption{Différents types de transitions}
+  \label{fig:TypesTransition}
+\end{figure}
 \subsection{Saut d'étapes et reprise de séquence}
 Le saut d'étapes permet de sauter une ou plusieurs étapes lorsque les actions associées sont inutiles à réaliser, La reprise de séquence (ou boucle) permet de reprendre, une ou plusieurs fois, une séquence tant qu'une condition n'est pas obtenue.
 
