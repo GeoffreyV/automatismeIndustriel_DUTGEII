@@ -1,0 +1,95 @@
+\section{Prise en main du LOGO}
+%\subsection{Tutoriel vidéo}
+\begin{UPSTIactivite}
+    Cette activité permet la prise en main d'un automate LOGO. 
+
+    Tout d'abord, visionner et suivre la \href{https://www.youtube.com/watch?v=ATcv0Dwm8ok}{vidéo} \url{https://www.youtube.com/watch?v=ATcv0Dwm8ok}.
+    
+    En utilisant des boutons poussoir au lieu des interrupteurs, réaliser le câblage proposé dans la vidéo et faire valider par l'enseignant. 
+\end{UPSTIactivite}
+\pagebreak
+\input{sections/sousSections/ladder.tex}
+\pagebreak
+\subsection{Application LADDER}
+\begin{UPSTIactivite}[][LADDER]
+    Soit le schéma suivant : 
+
+    \begin{center}
+        \includegraphics[width=.8\textwidth]{images/TP01_Ex01_cablage}
+    \end{center}
+
+    \begin{enumerate}
+        \item Saisir ce schéma en LADDER dans LogoSoft
+        \item A l'aide du simulateur, faire varier les entrées pour établir la table de vérité de la sortie Q1
+        \item Transformer ce schéma en logigramme à l'aide de l'icone \includegraphics[height=\fontcharht\font`\B]{images/logoSoft_laderToSchema.png} et déterminer l'équation logique de la sortie Q1 
+    \end{enumerate}
+\end{UPSTIactivite}
+
+\section{Exercice : Contrôle dimensionnel de pièces mécaniques}
+
+\begin{figure}[ht]
+    \centering
+    \begin{subfigure}{0.49\textwidth}
+        \centering
+        \includegraphics[width=\textwidth, height=.25\textheight, keepaspectratio]{images/TP01_Ex02_palpeur01}
+        \caption{Pièce OK}
+    \end{subfigure}
+    \begin{subfigure}{0.49\textwidth}
+        \centering
+        \includegraphics[width=\textwidth, height=.25\textheight, keepaspectratio]{images/TP01_Ex02_palpeur02}
+        \caption{Pièce à rejeter}
+    \end{subfigure}
+    \caption{Palpeurs d'une pièce mécanique}
+    \label{fig:palpeurs}
+\end{figure}
+
+Soit un système de contrôle dimensionnel de pièces mécaniques utilisant quatre capteurs A, B, C et D assoicés à deux palpeurs comme sur la Figure~\ref{fig:palpeurs}
+
+Comme indiqué sur la Figure, les 4 capteurs sont inactifs pour une pièce de taille correcte. 
+
+Le système de contrôle doit délivrer trois informations : 
+\begin{description}
+    \item[OK] lorsque la pièce est de taille correcte
+    \item[Usinage] lorsque la pièce est trop grande sans qu'un côté soit trop petit
+    \item[REJET] lorsque la pièce a au moins un côté trop petit  
+\end{description}
+
+\begin{table}[ht]
+    \centering
+    \begin{tabular}[]{c|c}
+        Capteur & Entrée \\\hline
+        A       &  I1\\
+        B       &  I2\\
+        C       &  I3\\
+        D       &  I4\\
+    \end{tabular}
+    \caption{Correspondance Capteur - Entrée de l'automate}
+\end{table}
+
+
+\begin{UPSTIactivite}
+    \UPSTIquestion{A l'aide de la Figure~\ref{fig:palpeurs}, donner les capteurs actifs lorsque la pièce est \begin{itemize}
+        \item Trop haute
+        \item Trop large
+        \item Pas suffisamment hautre
+        \item Pas suffisamment large
+    \end{itemize}}
+
+    \UPSTIquestion{Etablir la table de vérité du système}
+    \UPSTIquestion{Donner les équations de chaque sortie}
+    \UPSTIquestion{Programmer le fonctionnement dans le langage de votre choix.}
+
+    Les message seront affichés sur l'écran du LOGO : 
+    \begin{itemize}
+        \item OK sur fond BLANC
+        \item USINAGE sur fond ORANGE
+        \item REJET sur fond ROUGE 
+    \end{itemize}
+    \centering
+    \includegraphics[width=.8\textwidth]{images/TP01_couleur_ecran.png}
+
+
+
+
+
+\end{UPSTIactivite}
