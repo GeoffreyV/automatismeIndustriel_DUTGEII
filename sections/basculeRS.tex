@@ -1,0 +1,75 @@
+\section{La bascule RS}
+
+
+\subsection{Présentation}
+\UPSTIdefinition[bascule]{Une bascule (ou verrou) est un circuit logique capable de maintenir les valeurs de ses sorties malgré les changements de valeurs d'entrées. 
+Une bascule a donc un effet de mémoire.}
+
+\UPSTIaRetenir{
+	\begin{minipage}{.75\textwidth}
+		\begin{UPSTIaCompleterEnv}
+		Une bascule RS est une bascule à deux entrées de contrôle : $S$ (SET) et $R$ (RESET). Elle possède deux sorties \textit{$Q$} et \textit{$\overline{Q}$}. 
+		Son comportement est le suivant : 
+		\begin{itemize}
+			\item Une mise à 1 de $S$ met la sortie $Q$ à 1
+			\item Une mise à 1 de $R$ met la sortie $Q$ à 0
+			\item $R=S=0 \rightarrow$ Etat mémoire : la sortie $Q$ maintient son état précédent.
+			\item $R$ et $S$ à 1 est un état interdit
+		\end{itemize}
+		\vspace{1cm}
+		\end{UPSTIaCompleterEnv}
+		
+
+	\end{minipage}
+	\begin{minipage}{.25\textwidth}
+		\begin{UPSTIaCompleterEnv}
+			\begin{circuitikz}[]
+			\draw (0,0) node[flipflop SR](RS){} (RS.bup)
+			node[above]{Bascule RS};
+			% \draw (RS.pin 1) -- ++(-1,0) node[and port,
+			% anchor=out](AND1){}
+			% (RS.pin 3) -- ++(-1,0) node[and port,
+			% anchor=out](AND2){};
+		\end{circuitikz}
+		\end{UPSTIaCompleterEnv}
+		\centering
+	\end{minipage}
+
+\begin{center}
+	\begin{tabular}{cccc}
+		\hline
+		R & S & $Q$ 												& Remarque\\ \hline
+		0 & 0 &{$Q$}	 		& {Mémoire}\\
+		0 & 1 &{1}						& {Mise à 1}\\
+		1 & 0 &0						& {Mise à 0}\\
+		1 & 1 &0						& {Interdit}\\\hline
+	\end{tabular}	
+\end{center}
+}
+
+\begin{UPSTIactivite}
+\UPSTIquestion{Compléter le chronogramme ci-dessous}
+\begin{center}
+	\begin{tikztimingtable}[
+    timing/slope=0,         % no slope
+    timing/coldist=2pt,     % column distance
+    xscale=5,yscale=2, % scale diagrams
+    semithick               % set line width
+  ]
+
+  $R$   					&  				  LLLLLLHLLL                   \\
+  $S$                     &  				  LLHLHLLLLH     \\
+  $Q$                     &  L \\
+  $\overline{Q}$		&    H\\
+\end{tikztimingtable}%
+\end{center}
+\end{UPSTIactivite}
+
+
+\pagebreak
+
+\begin{UPSTIactivite}[][Bascules ]
+	
+	\UPSTIquestion{Etablir une bascule RS en langage LADDER}
+	\vspace{5cm}
+\end{UPSTIactivite}

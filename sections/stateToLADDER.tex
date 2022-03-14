@@ -1,0 +1,154 @@
+\section{Traduction d'une machine à état en LADDER}
+Au premier semestre, nous avions vu comment implémenter une machine à état à l'aide du langage C (avec l'utilisation de la structure \textit{switch ... case}. Ici, nous nous proposons d'implémenter une machine à état simple à l'aide du langage LADDER afin de la faire fonctionner sur un automate \textbf{LOGO}.
+
+\UPSTIaRetenir{
+	\begin{UPSTIaCompleterEnv}
+		Une démarche pour traduire une machine à état en LADDER est la suivante :
+		\begin{enumerate}
+			\item \textbf{Dessiner} la machine à état
+			\item Implémenter les transitions
+			\item Implémenter les changements d'état
+			\item Associer les actions aux différents états
+		\end{enumerate}
+		Par convention, les noms des transitions commenceront par un $t$ et les noms des variables par un $X$.
+	\end{UPSTIaCompleterEnv}
+}
+
+
+
+\begin{UPSTIactivite}[2][][][\,][Application guidée][0]
+	En suivant la méthode, traduire la machine à état à l'aide de bascules RS
+	\vspace{15cm}
+\end{UPSTIactivite}
+
+\subsection{Les transitions}
+Dans un premier temps, nous implémentons les transitions. Pour cela, voici les étapes à suivre :
+\begin{enumerate}[label=(\alph*)]
+	\item Déclarer une variable associée à cettre transition (exemple : $t_{0\rightarrow1}$ pour la transition de 0 vers 1)
+	\item Écrire l'équation régissant cette transition
+	\item Dessiner le réseau LADDER
+\end{enumerate}
+
+\UPSTIaRetenir{Une transition n'est franchie que si l'état précédent est actif et que la réceptivité associée est vérifiée.}
+
+\UPSTIexemple{Pour l'auto-maintien, pour la transition depuis l'état 0 vers l'état 1 :
+	\begin{enumerate}[label=(\alph*)]
+		\item Utilisons la variable $t_{0\rightarrow1}$
+		\item L'équation est : $t_{0\rightarrow1} = X_0 \cdot B_pM$
+		\item Le réseau LADDER :
+
+		      \begin{tikzpicture} [circuit plc ladder,thick,x=\ladderskip,y=\ladderskip]
+			      \draw(0,0)
+			      to [contact NO={info={$X_0$}}] ++(1,0)
+			      to [contact NO={info={$B_pM$}}] ++(1,0) --++(1,0)
+			      to [coil={info={$t_{0\rightarrow1}$}}] +(1,0) coordinate(laddertopright);
+
+			      \ladderrungend{1.2}
+			      % power rails
+			      \draw let \p1=(laddertopright) in
+			      (0,\y1+0.7\ladderskip) -- (0,\ladderskip)
+			      (\x1,\y1+0.7\ladderskip) -- (\x1,\ladderskip);
+		      \end{tikzpicture}
+	\end{enumerate}}
+
+\begin{UPSTIactivite}
+	\UPSTIquestion{Dessiner le schéma LADDER correspondant à la transition 1 vers 0}
+
+	\UPSTIaCompleter{
+		\begin{enumerate}[label=(\alph*)]
+			\item Utilisons la variable $t\_1-0$
+			\item L'équation est : $t_{1\rightarrow0} = X_1 \cdot B_pA$
+			\item Le réseau LADDER :
+			      \begin{tikzpicture} [circuit plc ladder,thick,x=\ladderskip,y=\ladderskip]
+				      \draw(0,0)
+				      to [contact NO={info={$X_1$}}] ++(1,0)
+				      to [contact NO={info={$B_pA$}}] ++(1,0) --++(1,0)
+				      to [coil={info={$t_{0\rightarrow1}$}}] +(1,0) coordinate(laddertopright);
+				      \ladderrungend{1.2}
+				      % power rails
+				      \draw let \p1=(laddertopright) in
+				      (0,\y1+0.7\ladderskip) -- (0,\ladderskip)
+				      (\x1,\y1+0.7\ladderskip) -- (\x1,\ladderskip);
+			      \end{tikzpicture}
+		\end{enumerate}}
+	\vspace{3cm}
+
+\end{UPSTIactivite}
+
+
+
+
+
+\subsection{Activation des Etats}
+Il faut à présent activer les état en à partir des transitions crées précédemment.
+
+\UPSTIaRetenir{L'écriture d'un état en LADDER se fait en deux étapes :
+	\begin{itemize}
+		\item Mise à 1 (SET) de l'état à l'aide d'un \textit{OU} sur toutes les transitions \textbf{arrivant} sur celui-ci
+		\item Mise à 0 (RESET) à l'aide d'un \textit{OU} sur toutes les transitions \textbf{partant} de celui-ci
+	\end{itemize}}
+
+
+Ainsi les réseaux associés à l'état 0 de l'auto-maintien sont donnés sur la Figure~\ref{fig:automaintienEtat0}
+
+
+\begin{figure}[h!t]
+  \centering
+	\begin{tikzpicture} [circuit plc ladder,thick,x=\ladderskip,y=\ladderskip]
+
+		\draw(0,0)
+		to [contact NO={info={$t\_1-0$}}] ++(2,0) coordinate(laddercoil) -- ++(2,0)
+		to [coil S={info={$X_0$}}] ++(1,0) coordinate(laddertopright);
+		\draw(0,-1)
+		to [contact NO={info={First cycle}}] ++(2,0) -- (laddercoil);
+		\ladderrungend{2}
+		\draw(0,0)
+		to [contact NO={info={$t_{0\rightarrow1}$}}] ++(2,0) coordinate(laddercoil) -- ++(2,0)
+		to [coil R={info={$X_0$}}] ++(1,0);
+		\ladderrungend{1}
+		% power rails
+		\draw let \p1=(laddertopright) in
+		(0,\y1+0.7\ladderskip) -- (0,\ladderskip)
+		(\x1,\y1+0.7\ladderskip) -- (\x1,\ladderskip);
+	\end{tikzpicture}
+  \caption{Etat 0 de l'automaintien}
+  \label{fig:automaintienEtat0}
+\end{figure}
+
+
+Le premier réseau active l'état 0 tandis que le deuxième le désactive.
+
+\pagebreak
+\begin{UPSTIactivite}
+  \UPSTIquestion{Dessiner les réseaux LADDER implémentant le comportement de l'état 1}
+  \vspace{5cm}
+\end{UPSTIactivite}
+
+
+\subsection{Associer les actions aux différents états}
+Il s'agit ici d'activer les actionneurs lorsque l'état associé est actif.
+Dans l'exemple de l'auto-maintien, la sortie $Q1$ devra-t-être active lorsque l'état 1 est actif.
+
+\begin{UPSTIactivite}
+  \UPSTIquestion{Dessiner un réseau LADDER permettant l'activation de la sortie lorsque l'état 1 est actif. 
+  \vspace{5cm}}
+\end{UPSTIactivite}
+
+\subsection{Résumé de la méthode}
+
+\UPSTIaRetenir[Méthode de traduction d'une machine à état en LADDER]{
+  \begin{enumerate}
+	\item \textbf{Dessiner} la machine à état
+	\item Implémenter les transitions
+	      \begin{enumerate}
+		      \item Déclarer une variable associée à cettre transition (exemple : $t_{0\rightarrow1}$ pour la transition de 0 vers 1)
+		      \item Écrire l'équation régissant cette transition
+		      \item Dessiner le réseau LADDER
+	      \end{enumerate}
+	\item Implémenter les changements d'état
+	      \begin{enumerate}
+		      \item Mise à 1 (SET) de l'état à l'aide d'un \textit{OU} sur toutes les transitions \textbf{arrivant} sur celui-ci
+		      \item Mise à 0 (RESET) à l'aide d'un \textit{OU} sur toutes les transitions \textbf{partant} de celui-ci
+	      \end{enumerate}
+	\item Associer les actions aux différents états
+\end{enumerate}}

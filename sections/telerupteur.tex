@@ -1,0 +1,42 @@
+\subsection{Télérupteur}
+Reprenons l'exemple du télérupteur. Un télérupteur a le comportement suivant :
+
+\UPSTIboiteCentrale{Cahier des charges - Télérupteur}{
+    \begin{itemize}
+        \item Au départ la lumière est éteinte
+        \item Un appui sur le bouton $BP$ allume la lumière
+        \item Un nouvel appui sur le bouton $BP$ éteint la lumière et on reprend à l'état initial
+    \end{itemize}
+}
+
+\begin{UPSTIactivite}
+	\UPSTIquestion{Dessiner la machine à état d'un télérupteur avec puis sans utilisation de front montant}
+
+	\begin{UPSTIaCompleterEnv}
+
+		\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=3cm,
+				semithick]
+			%\tikzstyle{every state}=[fill=none,draw=none,text=white]
+			\node[initial,state] (A)              {M1};
+			\node[state]         (B) [right of=A] {M2};
+			\path (A) edge [bend left]  node {$\uparrow B_p$} (B)
+			(B) edge [bend left]  node {$\uparrow B_p$} (A);
+		\end{tikzpicture}
+		% \begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=3cm,
+		% 		semithick]
+		% 	%\tikzstyle{every state}=[fill=none,draw=none,text=white]
+
+		% 	\node[initial,state] (A)              {0 : Arrêt};
+		% 	\node[state]         (B) [right of=A] {1 : Marche};
+		% 	\node[state]         (C) [right of=B] {2 : Marche};
+		% 	\node[state]         (D) [right of=C] {3 : Arrêt};
+
+		% 	\path (A) edge [bend left]  node {$B_p$} (B)
+		% 	(B) edge [bend left]  node {$\overline{B_p}$} (C)
+		% 	(C) edge [bend left]  node {${B_p}$} (D)
+		% 	(D) edge [bend left]  node {$\overline{B_p}$} (A);
+		% \end{tikzpicture}
+	\end{UPSTIaCompleterEnv}
+
+    \UPSTIquestion{En suivant le protocole, implémenter cette machine à état à l'aide d'un circuit logique.}
+\end{UPSTIactivite}
