@@ -1,0 +1,189 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% E.Pinault-Bigeard - e.pinault-bigeard@upsti.fr
+% http://s2i.pinault-bigeard.com
+% CC BY-NC-SA 2.0 FR - http://creativecommons.org/licenses/by-nc-sa/2.0/fr/
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[11pt]{article}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Package UPSTI_Document
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{import}
+%
+\input{inputs/commands}
+\usepackage{tikz-timing}
+\usepackage{circuitikz}
+\usepackage{pdfpages}
+%---------------------------------%
+% Paramètres du package
+%---------------------------------%
+
+% Version du document (pour la compilation)
+% 1: Document prof
+% 2: Document élève
+% 3: Document à publier
+\input{variables/documentVersion}
+\input{variables/infoDoc}
+
+% Référence au programme
+%\newcommand{\UPSTIprogramme}{\EPBComp \EPBCompP{B1-02}, \EPBCompP{B2-49}, \EPBCompS{B2-50}, \EPBCompS{B2-51}, \EPBCompP{C1-07}, \EPBCompP{C1-08}}
+
+% Si l'auteur n'est pas l'auteur par défaut
+%\renewcommand{\UPSTIauteur}{WWOOOOOOWW}
+
+% Si le document est réalisé au nom de l'équipe
+%\newcommand{\UPSTIdocumentCollegial}{1}
+
+% Source
+\newcommand{\UPSTIsource}{G. Vaquette}
+
+% Version du document
+\newcommand{\UPSTInumeroVersion}{1.0}
+
+%-----------------------------------------------
+\UPSTIcompileVars		% "Compile" les variables
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% Titre
+%\newcommand{\UPSTItitrePreambule}{Automatisme industriel}
+\newcommand{\UPSTItitre}{Exercice de synthèse} 
+\usetikzlibrary{arrows,automata,circuits.plc.ladder}
+
+\newlength{\ladderskip}
+\setlength{\ladderskip}{5\tikzcircuitssizeunit} % 5\tikzcircuitssizeunit = 35pt
+\newlength{\ladderrungsep}
+\setlength{\ladderrungsep}{.2\ladderskip}
+\def\ladderrungend#1{\pgftransformyshift{-#1\ladderskip-\ladderrungsep}}
+
+\ctikzset{
+	logic ports=ieee,
+	logic ports/scale=0.7,
+}
+
+
+
+\newcommand{\automaintienMachineEtat}[0]{
+\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=3cm,
+                    semithick]
+  %\tikzstyle{every state}=[fill=none,draw=none,text=white]
+
+  \node[initial,state] (A)              {M1};
+  \node[state]         (B) [right of=A] {M2};
+
+  \path (A) edge [bend left]  node {$B_pM$} (B)
+        (B) edge [bend left]  node {$B_pA$} (A);
+\end{tikzpicture}
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Début du document
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+\UPSTIbuildPage
+
+%\UPSTIobjectif{Durant cette activité, nous allons analyser une trame pour l'envoi d'informations sur une étiquette.}
+
+\tableofcontents
+%\pagebreak
+
+\pagebreak
+\section{Introduction}
+Cette séance de synthèse avant la semaine de TP test a pour objectif de revoir et d'appliquer les notions vues jusqu'ici. Elle portera sur un portail automatique.
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=.85\linewidth]{images/portail.jpg}
+	\caption{Partie opérative du portail automatique}
+	\label{fig:schemaPartieOperative}
+\end{figure}
+
+Le système consiste en un portail automatisé composé d'une barrière coulissante. Cette barrière est actionnée par un moteur à courant continu. Deux capteurs fin de course sont positionnés en bout du portail afin de détecter l'ouverture et la fermeture complète du portail.
+
+L'utilisateur commande le portail à l'aide de deux boutons poussoir : \textit{BPO} pour l'ouverture et \textit{BPF} pour la fermeture.
+
+Pour des questions de sécurité, un voyant lumineux clignote lorsque le portail est en mouvement et une barrière infrarouge détecte le passage d'une personne devant le portail lors de sa fermeture.
+
+\section{Travail en classe}
+\begin{UPSTIactivite}
+	\UPSTIquestion{Faire la liste des capteurs du système}
+
+	\UPSTIquestion{En déduire le nombre d'entrées logiques, numériques et analogiques}
+
+	\UPSTIquestion{Faire la liste des actionneurs du système}
+
+	Afin de commander le moteur dans les deux sens de rotation, on se propose d'utiliser deux relais. Ces deux relais possèdent des contacts normalement fermé et normalement ouvert.
+
+	\UPSTIquestion{En déduire le nombre de sorties logiques, numériques et analogiques}
+
+	\UPSTIquestion{Faudra-t-il installer des modules complémentaires sur le LOGO pour commander le portail ?}
+
+\end{UPSTIactivite}
+
+
+
+\begin{UPSTIactivite}
+	\UPSTIquestion{Dessiner le cablâge des capteurs sur les entrées de l'automate LOGO}
+	\UPSTIquestion{Dessiner le cablâge des sorties (lumière et relais)}
+	\UPSTIquestion{Dessiner le schéma des contacts pour les moteurs}
+\end{UPSTIactivite}
+
+\UPSTIboiteCentrale{Cahier des charges}{
+	\begin{itemize}
+		\item A l'appui sur le bouton poussoir d'ouverture, le portail s'ouvre complètement
+		\item Ensuite, à l'appui sur le bouton poussoir de fermeture, le portail se ferme complètement
+		\item Lorsque le portail est en mouvement, la lumière clignote
+	\end{itemize}
+}
+\begin{UPSTIactivite}
+	\UPSTIquestion{Dessiner une machine à état codant le comportement précédent.}
+\end{UPSTIactivite}
+
+\section{Travaux pratiques}
+\subsection{Cahier des charges principal}
+\begin{UPSTIactivite}
+	\UPSTIquestion{Réaliser le cablâge de l'activité précédente et faire vérifier par l'enseignant}
+	\UPSTIquestion{Implémenter la machine à état correspondante}
+\end{UPSTIactivite}
+
+\UPSTIboiteGenerique{Conseil pour les machine à état}{\bcplume}{
+	Lors de l'implémentation des machines à état, respecter la structure donnée en cours et ajouter des commentaires sur les Mementos correspondant aux états rendra la tâche plus simple et augmentera sa lisibilité. 
+}
+
+\subsection{Fermeture automatique}
+\UPSTIboiteCentrale{Cahier des charges - suite}{
+	\begin{itemize}
+		\item Une fois ouvert, le portail se ferme aussi automatiquement après 5 secondes
+		\item Durant la fermeture du portail, si une personne passe sur le trajet de la barrière, il se ré-ouvre 
+	\end{itemize}
+}
+
+
+\begin{UPSTIactivite}
+	\begin{itemize}
+		\item Modifier la machine à état pour respecter le cahier des charges ci-dessus
+		\item Implémenter ce cahier des charges
+	\end{itemize}
+
+	Afin d'effectuer de précieuses économies, on prend la décision de retirer un des deux capteurs fin de courses. Un seul capteur fin de course sert à la fois pour la position ouverte et pour la position fermée. 
+
+	\begin{itemize}
+		\item Effectuer le changement et débrancher le capteur non utilisé.
+	\end{itemize}
+\end{UPSTIactivite}
+\subsection{Mode \textit{rester ouvert}}
+\UPSTIboiteCentrale{Cahier des charges - suite}{
+	\begin{itemize}
+		\item Une fois ouvert, si on appui à nouveau sur le bouton d'ouverture, le portail entre dans un mode où il attend un appui sur le bouton de fermeture pour se fermer
+	\end{itemize}
+}
+
+
+\begin{UPSTIactivite}
+	\begin{itemize}
+		\item Modifier la machine à état pour respecter le cahier des charges ci-dessus
+		\item Implémenter ce cahier des charges
+	\end{itemize}
+\end{UPSTIactivite}
+\end{document}

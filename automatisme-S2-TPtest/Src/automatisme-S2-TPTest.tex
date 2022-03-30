@@ -1,0 +1,127 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% E.Pinault-Bigeard - e.pinault-bigeard@upsti.fr
+% http://s2i.pinault-bigeard.com
+% CC BY-NC-SA 2.0 FR - http://creativecommons.org/licenses/by-nc-sa/2.0/fr/
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[11pt]{article}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Package UPSTI_Document
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{import}
+%
+\input{inputs/commands}
+\usepackage{csvsimple}
+\usepackage{tikz-timing}
+\usepackage{circuitikz}
+\usepackage{pdfpages}
+%---------------------------------%
+% Paramètres du package
+%---------------------------------%
+
+% Version du document (pour la compilation)
+% 1: Document prof
+% 2: Document élève
+% 3: Document à publier
+\input{variables/documentVersion}
+\input{variables/infoDoc}
+
+% Référence au programme
+%\newcommand{\UPSTIprogramme}{\EPBComp \EPBCompP{B1-02}, \EPBCompP{B2-49}, \EPBCompS{B2-50}, \EPBCompS{B2-51}, \EPBCompP{C1-07}, \EPBCompP{C1-08}}
+
+% Si l'auteur n'est pas l'auteur par défaut
+%\renewcommand{\UPSTIauteur}{WWOOOOOOWW}
+
+% Si le document est réalisé au nom de l'équipe
+%\newcommand{\UPSTIdocumentCollegial}{1}
+
+% Source
+\newcommand{\UPSTIsource}{G. Vaquette}
+
+% Version du document
+\newcommand{\UPSTInumeroVersion}{1.0}
+
+%-----------------------------------------------
+\UPSTIcompileVars		% "Compile" les variables
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% Titre
+%\newcommand{\UPSTItitrePreambule}{Automatisme industriel}
+\newcommand{\UPSTItitre}{TP Test} 
+\usetikzlibrary{arrows,automata,circuits.plc.ladder}
+
+\newlength{\ladderskip}
+\setlength{\ladderskip}{5\tikzcircuitssizeunit} % 5\tikzcircuitssizeunit = 35pt
+\newlength{\ladderrungsep}
+\setlength{\ladderrungsep}{.2\ladderskip}
+\def\ladderrungend#1{\pgftransformyshift{-#1\ladderskip-\ladderrungsep}}
+
+\ctikzset{
+	logic ports=ieee,
+	logic ports/scale=0.7,
+}
+
+
+
+\newcommand{\automaintienMachineEtat}[0]{
+\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=3cm,
+                    semithick]
+  %\tikzstyle{every state}=[fill=none,draw=none,text=white]
+
+  \node[initial,state] (A)              {M1};
+  \node[state]         (B) [right of=A] {M2};
+
+  \path (A) edge [bend left]  node {$B_pM$} (B)
+        (B) edge [bend left]  node {$B_pA$} (A);
+\end{tikzpicture}
+}
+
+
+\newcommand{\sujet}{
+	\exemplaire{1}{
+	% En-tête
+	\UPSTIbuildPage
+	% \UPSTIamcZoneIdentification
+	\begin{center}
+			\noindent{}\fbox{\vspace*{3mm}
+			\champnom{\Huge\bf\nom{}~\prenom{}~\id}\normalsize{}%
+			\vspace*{3mm}
+			\AMCassociation{\id}
+		}
+	\end{center}
+	}
+
+	
+
+	\UPSTIboiteGenerique{Evaluation}{\bcplume}{Chaque activité sera implémentée sur un programme différent. N'attendez pas qu'un enseignant ait validé l'activité précédente avant de commencer le programme de la suivante.}
+	\restituegroupe{combinatoire}
+	\restituegroupe{sequentiel}
+	\restituegroupe{analogique}
+	\restituegroupe{machineAEtat}
+
+	\includepdf[pages=-,pagecommand={},,, scale=0.81, trim=5mm 5mm 8mm 0, clip]{images/cablageTPtest.pdf}
+
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Début du document
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+%\UPSTIobjectif{Durant cette activité, nous allons analyser une trame pour l'envoi d'informations sur une étiquette.}
+
+%\tableofcontents
+%\pagebreak
+
+
+\input{sections/tpTest/combinatoire.tex}
+\input{sections/tpTest/sequentiel.tex}
+\input{sections/tpTest/analogique.tex}
+\input{sections/tpTest/machineAEtat.tex}
+
+
+
+
+\csvreader[head to column names]{listeSolo.csv}{}{\sujet}
+
+\end{document}
