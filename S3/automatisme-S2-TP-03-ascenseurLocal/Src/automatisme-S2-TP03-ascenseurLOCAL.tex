@@ -1,0 +1,232 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% E.Pinault-Bigeard - e.pinault-bigeard@upsti.fr
+% http://s2i.pinault-bigeard.com
+% CC BY-NC-SA 2.0 FR - http://creativecommons.org/licenses/by-nc-sa/2.0/fr/
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[11pt, multicol]{article}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Package UPSTI_Document
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{inputs/commands}
+\usepackage{multirow}
+%---------------------------------%
+% Paramètres du package
+%---------------------------------%
+
+% Version du document (pour la compilation)
+% 1: Document prof
+% 2: Document élève
+% 3: Document à publier
+\input{variables/documentVersion}
+
+\input{variables/infoDoc}
+
+% Référence au programme
+%\newcommand{\UPSTIprogramme}{\EPBComp \EPBCompP{B1-02}, \EPBCompP{B2-49}, \EPBCompS{B2-50}, \EPBCompS{B2-51}, \EPBCompP{C1-07}, \EPBCompP{C1-08}}
+
+% Si l'auteur n'est pas l'auteur par défaut
+%\renewcommand{\UPSTIauteur}{WWOOOOOOWW}
+
+% Si le document est réalisé au nom de l'équipe
+%\newcommand{\UPSTIdocumentCollegial}{1}
+
+% Source
+\newcommand{\UPSTIsource}{G. Vaquette, A. Juton, J. Deprez, J. Maillefert}
+
+% Version du document
+\newcommand{\UPSTInumeroVersion}{1}
+
+%-----------------------------------------------
+\UPSTIcompileVars		% "Compile" les variables
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Début du document
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\nomTP}{ascenseurLocal}
+\begin{document}
+\UPSTIbuildPage
+\UPSTIobjectif{\begin{itemize}
+	\item Reconnaissance de la partie opérative
+	\item Identification des capteurs et des actionneurs
+ 	\item Identification des éléments de la commande
+	\item Prise en main de l’outil de développement
+ 	\item Mise au point de programmes de test
+\end{itemize}}
+
+\tableofcontents
+
+
+\section{Introduction}
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=.63\linewidth]{images/schemaSysteme}
+	\caption{Partie opérative du système de tri de pièce}
+	\label{fig:schemaPartieOperative}
+\end{figure}
+Ce TP porte sur une maquette d'ascenseur (Figure~\ref{fig:schemaPartieOperative}). Ce système est piloté par un automate programmable MODICON de la marque SCHNEIDER. On fera, dans un premier temps, un test des capteurs et des actionneurs.
+Le développement se fera à l'aide du logiciel \textbf{EcoStruxure} de \textit{Schneider Electric}. Ce TP traite majoritairement d'un comportement séquentiel qui sera implémenté à l'aide de GRAFCET.
+
+\section{Partie opérative}
+\subsection{Description}
+Le système est composé d'une cabine se déplaçant dans une gaine d'ascenseur ainsi que de boutons et voyants à chaque étage (Figure~\ref{fig:schemaPartieOperative}).
+
+L’ascenseur dessert quatre étages. La cabine est actionnée par un moteur à courant continu MCC.
+La commande du moteur comporte une alimentation et un inverseur de sens de rotation à relais.
+
+Chaque étage est muni d’un détecteur de présence inductif (DPI1, DPI2, DPI3, DPI4) et d’un
+voyant d’appel (VOY1, VOY2, VOY3, VOY4).
+Chaque palier dispose d’un bouton poussoir d’appel pour (BP1, BP2, BP3, BP4)
+La cabine est munie de 4 boutons d’appel : Appel1, Appel2, Appel3, Appel4.
+Le pupitre de commande comporte un coup de point d’urgence (AU), un commutateur 3 positions
+gauche/auto/droite. En position « auto », deux détecteurs mécaniques de fin de course FCB et
+FCH coupent l’alimentation du moteur en cas de dépassement des positions limites. Si la cabine
+est bloquée en haut ou en bas, on court-circuite le FCH en position gauche et le FCB en position
+« manu ». On a alors accès à la commande du variateur et on peut ainsi débloquer la cabine.
+
+
+La liste des différents capteurs et actionneurs ainsi que leur variable assocée est données dans le Tableau~\ref{tab:capteursActionneurs}.
+
+\begin{table}[ht]
+\centering
+	\begin{tabular}{|ll || ll|}
+	\hline
+		\multicolumn{2}{|c||}{Capteurs} 				    & \multicolumn{2}{c|}{Actionneurs}                        \\
+		Type                                        & Signal associé & Type                     & Signal associé    \\\hline
+		\multirow{4}{*}{Capteurs inductifs étage}   & DPI1           & \multirow{4}{*}{Voyants} & VOY1              \\
+		                                            & DPI2           &                          & VOY1              \\
+		                                            & DPI3           &                          & VOY2              \\
+																						    & DPI4		       &                          & VOY2              \\\hline
+  	Arrêt d'urgence										          & AU					   &                          & 		              \\\hline
+		\multirow{4}{*}{Boutons d'appel}            & BP1d et BP1m   & \multirow{2}{*}{Moteur}  & monter            \\
+		                                            & BP2d et BP2m   &                          & descendre         \\\cline{3-4}
+																								& BP3d et BP3m   &                          &                   \\
+																								& BP3d et BP3m	 & 													& 									\\\cline{1-2}
+		\multirow{2}{*}{Fins de course}             & FCH            &                          &                   \\
+																							  & FCB            &                          &                   \\\hline
+	\end{tabular}
+	\caption{Liste des capteurs et actionneurs}
+	\label{tab:capteursActionneurs}
+\end{table}
+
+\UPSTIremarque{Pour simplifier la commande du moteur, une fonction d’initialisation a été écrite, utilisant les
+variables Monter et Descendre, à la place de COMMANDE et VITESSE.
+\begin{itemize}
+	\item Pour que la cabine se déplace vers le haut, il suffit de placer la variable Monter à TRUE.
+	\item Pour que la cabine se déplace vers le bas, il suffit de placer la variable Descendre à TRUE.
+\end{itemize}
+}
+
+\UPSTIattention{Durant tout ce TP, il faut éviter d'amener l'ascenseur en fin de course. Cela met en arrêt la maquette et il faut alors déplacer la cabine manuellement à l'aide d'une clef.
+
+Si votre ascenseur arrive en fin de course, appelez l'enseignant pour qu'il le débloque.}
+
+\section{Partie commande (API)}
+La partie commande est assurée par un automate \textit{MODICON} du constructeur \textit{Schneider}. Il dispose d'un module d'entrée TOR et d'un module de sortie TOR.
+
+\UPSTIrappel{\begin{itemize}
+	\item Les \textbf{capteurs} de la partie opérative sont reliées aux \textbf{entrées} de l'automate.
+	\item Les \textbf{actionneurs} de la partie opérative sont reliées aux \textbf{sorties} de l'automate.
+\end{itemize}
+}
+\subsection{Table d'entrée-sortie de l'automate}
+Afin de gagner du temps lors du TP, nous fournissons un projet configuré à l'avance. La table des entrées-sorties est incluse à ce projet (Figure~\ref{fig:entreesSorties})
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=.9\textwidth]{images/listeES}
+	\caption{Table des entrées et sorties au sein du projet}
+	\label{fig:entreesSorties}
+\end{figure}
+\pagebreak
+\section{Travail demandé}
+\subsection{Mise en place informatique}
+\input{ressources/miseEnplaceInfo}
+\subsection{Consignes et conseils pour la rédaction du compte-rendu}
+\input{ressources/consignesCR}
+\subsection{Prise en main et vérification du fonctionnement du système}
+\input{ressources/verificationES}
+
+\subsection{Programmation de l'automate}
+\subsubsection{Initialisation et premiers mouvements}
+On propose le cahier des charges suivant :
+\UPSTIboiteGenerique{Cahier des charges 1 : Descente au premier cycle}{\bcoutil}{
+\begin{itemize}
+	\item Au démarrage de l'automate, la cabine descend au RDC.
+	\item Un appui sur le bouton palier de l'étage 4 fait monter l'ascenseur à l'étage 4.
+\end{itemize}}
+
+\begin{UPSTIactivite}[][Implémentation du Cahier des charges 1]
+	\label{act:montee}
+	\begin{enumerate}
+		\item Dessiner, sur papier ou à l'aide d'un logiciel adapté, le GRAFCET à implémenter
+		\item Créer une section dans le projet et implémenter la structure du GRAFCET
+		\item Ajouter un commentaire à côté de chage action pour décrire les actions voulues
+		\item Implémenter les transitions (penser à créer des sections transitions au besoin, donner des noms \textbf{compréhensibles})
+		\item Ajouter et implémenter une section transitions (LADDER ou ST) pour l'activation des actionneurs
+	\end{enumerate}
+\end{UPSTIactivite}
+\UPSTIboiteGenerique{Aide à la rédaction}{\bcplume}{
+	A titre d'exemple, dans votre compte-rendu, vous pouvez insérer le GRAFCET ainsi que la section actionneurs. Vous pouvez également expliquer la démarche pour construire un des réseaux du programme LADDER.
+}
+
+\subsubsection{Appels aux différents étages}
+\UPSTIboiteGenerique{Cahier des charges 2 : Appel depuis le RDC}{\bcoutil}{
+\begin{itemize}
+	\item Le cahier des charges précédent est toujours respecté
+	\item Un appui sur le bouton palier du RDC fait descendre l'ascenseur
+\end{itemize}}
+
+\UPSTIrappel{Une divergence en OU ne doit comporter que des branches exclusives.}
+\begin{UPSTIactivite}[][Implémentation du Cahier des charges 2]
+	Dans une \textbf{nouvelle section} s'ajoutant à la précédente, suivre la même démarche que pour l'activité~\ref{act:montee} pour le cahier des charges 2.
+	Modifier la section actionneurs.
+\end{UPSTIactivite}
+
+
+\UPSTIboiteGenerique{Cahier des charges 3 : Ajout des étages 2 et 3}{\bcoutil}{
+\begin{itemize}
+	\item Les cahiers des charges précédents sont toujours respectés
+	\item Un appui sur le bouton palier de l'étage 2 fait venir l'ascenseur à cet étage
+	\item Un appui sur le bouton palier de l'étage 3 fait venir l'ascenseur à cet étage
+	\item Les boutons de la cabine fonctionnent de la même façon
+\end{itemize}}
+
+\begin{UPSTIactivite}[][Implémentation du cahier des charges 3]
+	Pour celui-ci, il est bon de se demander quand l'ascenseur doit-il monter et quand il doit descendre.
+	\begin{enumerate}
+		\item Dessiner, vérifier puis implémenter le comportement pour l'étage 2
+		\item Faire de même pour l'étage 3
+		\item Modifier vos conditions pour que les boutons de la cabine fonctionnent également
+	\end{enumerate}
+\end{UPSTIactivite}
+\UPSTIboiteGenerique{Aide à la rédaction}{\bcplume}{
+	Il serait judicieux d'expliquer vos réflexions et la méthode retenue.
+}
+
+\UPSTIpresenceProf[Faire vérifier le bon fonctionnement]{S'il nest pas disponible, sauvegarder cette version et continuer le TP en attendant.}
+
+\subsubsection{Allumons la lumière}
+\UPSTIboiteGenerique{Cahier des charges 4 : les voyant à l'étage}{\bcoutil}{
+\begin{itemize}
+	\item Les cahiers des charges précédents sont toujours respectés
+	\item Lorsque l'ascenseur est appelé à un étage, le voyant s'allume jusqu'à ce que l'ascenseur s'y arrête.
+	\end{itemize}}
+
+\begin{UPSTIactivite}[][Les voyants]
+	Ce programme sera implémenté \textbf{dans une section indépendante} du programme précédent. C'est une autre programme qui gère les voyants.
+\end{UPSTIactivite}
+
+
+\begin{UPSTIactivite}[2][Pour aller plus loin : Mémorisation des appels]
+	L'ascenseur doit maintenant gérer les appels multiples :
+	\begin{itemize}
+		\item Si l'ascenseur se trouve au RDC et qu'un appel est fait à l'étage 4 et à l'étage 2, l'ascenseur desservira ces deux étages lors de sa montée.
+	\end{itemize}
+\end{UPSTIactivite}
+
+\begin{UPSTIactivite}[2][Pour aller \textit{encore} plus loin : Prise en compte du sens de l'ascenseur]
+	On suppose que les personne de chaque étage autre que le RDC désirent descendre. On ne s'arrêtera à ces étages uniquement si l'ascenseur est soit en attente, soit en descente.
+\end{UPSTIactivite}
+
+\end{document}

@@ -1,0 +1,109 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% E.Pinault-Bigeard - e.pinault-bigeard@upsti.fr
+% http://s2i.pinault-bigeard.com
+% CC BY-NC-SA 2.0 FR - http://creativecommons.org/licenses/by-nc-sa/2.0/fr/
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[11pt, multicol]{article}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Package UPSTI_Document
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{inputs/commands}
+%---------------------------------%
+% Paramètres du package
+%---------------------------------%
+
+% Version du document (pour la compilation)
+% 1: Document prof
+% 2: Document élève
+% 3: Document à publier
+\input{variables/documentVersion}
+
+\input{variables/infoDoc}
+
+% Référence au programme
+%\newcommand{\UPSTIprogramme}{\EPBComp \EPBCompP{B1-02}, \EPBCompP{B2-49}, \EPBCompS{B2-50}, \EPBCompS{B2-51}, \EPBCompP{C1-07}, \EPBCompP{C1-08}}
+
+% Si l'auteur n'est pas l'auteur par défaut
+%\renewcommand{\UPSTIauteur}{WWOOOOOOWW}
+
+% Si le document est réalisé au nom de l'équipe
+%\newcommand{\UPSTIdocumentCollegial}{1}
+
+% Source
+\newcommand{\UPSTIsource}{G. Vaquette, A. Juton, J. Deprez, J. Maillefert}
+
+% Version du document
+\newcommand{\UPSTInumeroVersion}{1.1}
+
+%-----------------------------------------------
+\UPSTIcompileVars		% "Compile" les variables
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Début du document
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{grafcet}
+\input{ladder_diagrams/initLadder}
+\usepackage{enumitem}
+\begin{document}
+\UPSTIbuildPage
+
+%\UPSTIobjectif{Durant cette activité, nous allons analyser une trame pour l'envoi d'informations sur une étiquette.}
+
+%\tableofcontents
+\section{Un tableau automatisé}
+On souhaite réaliser la commande numérique d’un tableau dans une salle de classe (système qui fut disponible
+dans les amphithéâtres de l’IUT de Cachan).
+
+Le tableau se déplace le long de deux glissières grâce à un moteur. Le déplacement du tableau de haut en bas ou
+de bas en haut est lié au sens de rotation de ce moteur. Le sens de rotation du moteur est déterminé par l’état de
+deux signaux logiques MotM et MotD tels que
+
+\begin{table}[hb]
+\centering
+  \begin{tabular}{c|c|c}
+    MotM & MotD &\\
+    0     & 0   & Tableau arrêté\\
+    0&1&Descente du tableau\\
+    1&0&Montée du tableau
+  \end{tabular}
+  \caption{Comportement du tableau selon l'activation des moteurs}
+  \label{tab:sortieTableau}
+\end{table}
+
+Un capteur de fin de course FcH fournit un signal à ‘1’ si le tableau se situe tout en haut de la glissière.
+
+Un capteur de fin de course FcB fournit un signal à ‘1’ si le tableau se situe tout en bas de la glissière.
+
+L’utilisateur (le prof ...) dispose de deux boutons-poussoirs BpM, BpD (« montée », « descente ») pour régler la
+position du tableau. Ces boutons-poussoirs fournissent une impulsion à ‘1’ lorsqu’on les enfonce.
+
+
+\UPSTIquestion{Identifier les entrées et les sorties de la commande de ce système}
+
+\UPSTIcorrection{\begin{description}
+  \item [Entrées : ] FcH, FCb, BpM, BbD
+  \item [Sorties : ]  MotM, MotD
+\end{description}}
+
+
+
+\UPSTIquestion{Représenter le système sous forme d'une boite comportant les entrées et sorties}
+\UPSTIquestion{Le comportement décrit est-il combinatoire ou séquentiel ?}
+
+\UPSTIcorrection{Combinatoire (la sortie ne dépend que des entrées)}
+
+\UPSTIquestion{Proposer un programm en LADDER respectant le cahier des charges.}
+
+\UPSTIcorrection{\input{ladder_diagrams/lad_tableauAmphi.tikz}}
+
+
+\section{Pupitre simple (TP 1 et 2)}
+On reprend l'enoncé du pupitre, TD 1.
+\resetNumQuestion
+\UPSTIquestion{Ecrire le programme en LADDER tel que le voyant V0 s’allume si et seulement si on appuie sur le bouton BP0 ou sur le bouton BP1}
+\UPSTIquestion{Ecrire le programme répondant au cahier des charges suivant : le bouton BP2 enfoncé allume V0 et V3, le bouton BP1 enfoncé allume V0 et V2. Il y a ici 3 sorties, le programme doit donc comporter 3 réseaux.}
+\UPSTIquestion{Auto-maintient : écrire un programme en LADDER tel que l’appui sur BP0 allume V0, l’appui sur BP1 éteint V0. S’agit-il d’un programme combinatoire ou séquentiel ? Cette structure doit être connue.}
+\UPSTIquestion{Gestion d’un compteur : Ecrire le programme répondant au cahier des charges suivant : Le compteur s'incrémente de 1 à chaque appui sur BP2. Il est remis à zéro par BP0. Quand la valeur du compteur est strictement supérieure à 3, le voyant V1 s’allume. « compteur » est une variable interne de de type INT.}
+\end{document}

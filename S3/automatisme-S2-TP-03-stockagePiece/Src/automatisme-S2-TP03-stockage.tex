@@ -1,0 +1,227 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% E.Pinault-Bigeard - e.pinault-bigeard@upsti.fr
+% http://s2i.pinault-bigeard.com
+% CC BY-NC-SA 2.0 FR - http://creativecommons.org/licenses/by-nc-sa/2.0/fr/
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[11pt, multicol]{article}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Package UPSTI_Document
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{inputs/commands}
+\usepackage{multirow}
+%---------------------------------%
+% Paramètres du package
+%---------------------------------%
+
+% Version du document (pour la compilation)
+% 1: Document prof
+% 2: Document élève
+% 3: Document à publier
+\input{variables/documentVersion}
+
+\input{variables/infoDoc}
+
+% Référence au programme
+%\newcommand{\UPSTIprogramme}{\EPBComp \EPBCompP{B1-02}, \EPBCompP{B2-49}, \EPBCompS{B2-50}, \EPBCompS{B2-51}, \EPBCompP{C1-07}, \EPBCompP{C1-08}}
+
+% Si l'auteur n'est pas l'auteur par défaut
+%\renewcommand{\UPSTIauteur}{WWOOOOOOWW}
+
+% Si le document est réalisé au nom de l'équipe
+%\newcommand{\UPSTIdocumentCollegial}{1}
+
+% Source
+\newcommand{\UPSTIsource}{G. Vaquette, A. Juton, J. Deprez, J. Maillefert}
+
+% Version du document
+\newcommand{\UPSTInumeroVersion}{1.0}
+
+%-----------------------------------------------
+\UPSTIcompileVars		% "Compile" les variables
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Début du document
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\nomTP}{ascenseurCAN}
+\begin{document}
+\UPSTIbuildPage
+\UPSTIobjectif{\begin{itemize}
+	\item Reconnaissance de la partie opérative
+	\item Identification des capteurs et des actionneurs
+ 	\item Identification des éléments de la commande
+	\item Prise en main de l’outil de développement
+ 	\item Mise au point de programmes de test
+\end{itemize}}
+
+\tableofcontents
+
+
+\section{Introduction}
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=.8\linewidth]{images/schemaSysteme}
+	\caption{Partie opérative du système de tri de pièce}
+	\label{fig:schemaPartieOperative}
+\end{figure}
+Ce TP porte sur une maquette de système de stockage temporaire de pièce (Figure~\ref{fig:schemaPartieOperative}). Ce système est piloté par un automate programmable MODICON de la marque SCHNEIDER. On fera, dans un premier temps, un test des capteurs et des actionneurs.
+Le développement se fera à l'aide du logiciel \textbf{EcoStruxure} de \textit{Schneider Electric}. Ce TP traite majoritairement d'un comportement séquentiel qui sera implémenté à l'aide de GRAFCET.
+
+\section{Partie opérative}
+\subsection{Description}
+L’appareil s’intercale entre deux machines de production et a pour fonction d’absorber les
+irrégularités de production de la machine amont ou de consommation de pièces de la machine
+aval (Figure~\ref{fig:schemaPartieOperative}).
+Par exemple, la machine 1  est plus rapide que la machine 2 mais travaille irrégulièrement. Pendant
+les arrêts de la machine 1, le stock diminue. Pendant ses phases de production, le stock
+augmente. Grâce au stock tampon, la machine 2 travaille en continu à son maximum de
+capacité~\ref{fig:application}.
+
+\begin{figure}
+	\begin{subfigure}{0.49\textwidth}
+	\centering
+		\includegraphics[width=\textwidth]{images/fluxPiece}
+		\caption{Signal analogique}
+	\end{subfigure}%
+	\begin{subfigure}{.49\textwidth}
+		\includegraphics[width=\textwidth]{images/graphPiece}
+		\caption{Flux des pièces}
+	\end{subfigure}
+	\caption{application d'un stockage temporaire de pièces}
+	\label{fig:application}
+\end{figure}
+
+Les pièces sont acheminées par un convoyeur entraîné par le moteur MC.
+En phase de stockage, les pièces sont arrêtées par un bloqueur actionné par le vérin de déplacement horizontal VB et comportant un détecteur de proximité inductif DPI4.
+La pièce est saisie par une ventouse EA solidaire du vérin de déplacement vertical VEA.
+Le bras manipulateur, entraîné transversalement par le moteur MT et longitudinalement par le
+vérin VL permet de stocker la pièce sur une palette à 6 emplacements. Quatre détecteurs de
+proximité inductifs DPI0, DPI1, DPI2 et DPI3 alignés le long du guide transversal renseignent sur
+la position du bras manipulateur.
+En phase de déstockage, la ventouse saisit la pièce à déstocker et la positionne sur le
+convoyeur.
+Plusieurs modes de fonctionnement sont possibles :
+\begin{itemize}
+	\item FIFO (First In First Out) qui préserve l’ordre de production des pièces,
+	\item  Au plus vite : on pose les pièces dans la case vide la plus proche et on les prend dans la case
+	pleine la plus proche.
+\end{itemize}
+
+\subsection{A propos du bras manipulateur trois axes}
+Le manipulateur 3 axes se déplace selon 3 axes : \textbf{transversal, longitudinal et vertical}.
+
+\paragraph{Mouvement transversal (perpendiculaire au convoyeur) }La transmission mécanique comporte une courroie. Le câblage du moteur autorise la marche
+avant et la marche arrière. La position est contrôlée par quatre détecteurs de position, DPIn
+correspondant à la position de saisie/dépose sur le convoyeur et aux trois positions de stockage.
+Deux contacteurs de fin de course FC1 et FC2 coupent l’alimentation du moteur en butée
+mécanique. Pour autoriser un nouveau fonctionnement, le chariot doit être écarté des butées
+(mode manuel).
+Il y a une commande pour le déplacement avant et une commande pour le déplacement arrière.
+
+\paragraph{Mouvement longitudinal (parallèle au convoyeur)}
+Deux positions, avancée ou reculée, course de 50 mm commandée par un vérin pneumatique.
+La même commande (active ou inactive) provoque le déplacement dans un sens ou dans l’autre.
+
+\paragraph{Mouvement vertical }Deux positions : haute et basse, la course est commandée par vérin.
+Il y a une commande pour la montée et une commande pour la descente.
+
+
+\subsection{A propos des actionneurs pneumatiques}
+Le montage comporte des actionneurs électriques (comme le moteur) et pneumatiques (les vérins).
+La commande de ces actionneurs pneumatiques (vérins simple effet) se fait par l’intermédiaire
+d’électro distributeurs (vannes pneumatiques commandées électriquement).
+
+Lorsqu'une tension de 24V est appliquée à la bobine des électro distributeurs, elle provoque la commutation des circuits d’air. L'air comprimé augmente alors la pression d'un côté du corps du vérin associé provoquant la sortie (ou retour) de la tige du vérins.
+Pour chacun de ces verins, des capteurs permettent de tester leur état « SORTI » (repérés B5, B6, B7, B8, B9 sur la maquette).
+
+\UPSTIattention{Il faut vérifier que le compresseur de la salle de TP a été mis en marche.}
+
+\section{Partie commande (API)}
+La partie commande est assurée par un automate \textit{MODICON} du constructeur \textit{Schneider}. Il dispose d'un module d'entrée TOR et d'un module de sortie TOR.
+
+\UPSTIrappel{\begin{itemize}
+	\item Les \textbf{capteurs} de la partie opérative sont reliées aux \textbf{entrées} de l'automate.
+	\item Les \textbf{actionneurs} de la partie opérative sont reliées aux \textbf{sorties} de l'automate.
+\end{itemize}
+}
+\subsection{Table d'entrée-sortie de l'automate}
+Afin de gagner du temps lors du TP, nous fournissons un projet configuré à l'avance. La table des entrées-sorties est incluse à ce projet (Figure~\ref{fig:entreesSorties})
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=.9\textwidth]{images/listeES}
+	\caption{Table des entrées et sorties au sein du projet}
+	\label{fig:entreesSorties}
+\end{figure}
+\pagebreak
+\section{Travail demandé}
+\subsection{Mise en place informatique}
+\input{ressources/miseEnplaceInfo}
+\subsection{Consignes et conseils pour la rédaction du compte-rendu}
+\input{ressources/consignesCR}
+\subsection{Prise en main et vérification du fonctionnement du système}
+\input{ressources/verificationES}
+
+\subsection{Programmation de l'automate}
+\subsubsection{Stockage d'une pièce}
+On propose le cahier des charges suivant :
+\UPSTIboiteGenerique{Cahier des charges 1 : stockage d'une pièce}{\bcoutil}{
+\begin{itemize}
+	\item Le stockage ne se fait que si le commutateur 3 positions est en position droite.
+	\item La procédure de stockage est engagée par action sur le bouton poussoir Départ Cycle
+	\item Le voyant bleu est allumé durant toute l'opération de stockage
+	\item La procédure de stockage est la suivante :
+	\begin{enumerate}
+		\item Sortie du vérin de blocage
+		\item Avance du convoyeur jusqu'à détection d'une pièce bloquée
+		\item Saisie de la pièce et stockage en position 4
+		\item Extinction du voyant et attente d'un nouveau cycle
+	\end{enumerate}
+\end{itemize}}
+
+\begin{UPSTIactivite}[][Implémentation du Cahier des charges 1]
+	\label{act:montee}
+	\begin{enumerate}
+		\item Dessiner, sur papier ou à l'aide d'un logiciel adapté, le GRAFCET à implémenter
+		\item Créer une section dans le projet et implémenter la structure du GRAFCET
+		\item Ajouter un commentaire à côté de chage action pour décrire les actions voulues
+		\item Implémenter les transitions (penser à créer des sections transitions au besoin, donner des noms \textbf{compréhensibles})
+		\item Ajouter et implémenter une section transitions (LADDER ou ST) pour l'activation des actionneurs
+	\end{enumerate}
+\end{UPSTIactivite}
+\UPSTIboiteGenerique{Aide à la rédaction}{\bcplume}{
+	A titre d'exemple, dans votre compte-rendu, vous pouvez insérer le GRAFCET ainsi que la section actionneurs. Vous pouvez également expliquer la démarche pour construire un des réseaux du programme LADDER.
+}
+
+\subsubsection{Déstockage d'une pièce}
+\UPSTIboiteGenerique{Cahier des charges 2 : Déstockage}{\bcoutil}{
+	\begin{itemize}
+		\item Le déstockage ne se fait que si le commutateur 3 positions est en position \textbf{gauche}.
+		\item La procédure de déstockage est engagée par action sur le bouton poussoir Départ Cycle
+		\item Le voyant bleu est allumé durant toute l'opération de stockage
+		\item La procédure de stockage est la suivante :
+		\begin{enumerate}
+			\item Saisie de la pièce en position 4
+			\item Dépose sur le convoyeur
+			\item Avance du convoyeur pendant 3 secondes
+			\item Extinction du voyant et attente d'un nouveau cycle
+		\end{enumerate}
+	\end{itemize}}
+
+\begin{UPSTIactivite}[][Implémentation du Cahier des charges 2]
+\begin{itemize}
+	\item En suivant la même démarche que pour l'activité~\ref{act:montee}, implémenter le cahier des charges 2.
+	Modifier la section actionneurs.
+	\item Ajouter les conditions suivantes :
+	\begin{itemize}
+		\item Le stockage est autorisé s’il n’y a pas de pièce sur l’emplacement 4
+		\item Le déstockage est autorisé s’il y a une pièce sur l’emplacement 4
+	\end{itemize}
+\end{itemize}
+\end{UPSTIactivite}
+
+\begin{UPSTIactivite}[2][Pour aller plus loin : Stockage de plusieurs pièces]
+	Implémenter le stockage et le déstockage de plusieurs pièces (si l'emplacement 4 est occupé, le stockage se fait sur l'emplacement 1, puis 2, etc.)
+\end{UPSTIactivite}
+
+\end{document}

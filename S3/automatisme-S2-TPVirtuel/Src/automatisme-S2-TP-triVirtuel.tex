@@ -1,0 +1,131 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% E.Pinault-Bigeard - e.pinault-bigeard@upsti.fr
+% http://s2i.pinault-bigeard.com
+% CC BY-NC-SA 2.0 FR - http://creativecommons.org/licenses/by-nc-sa/2.0/fr/
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[11pt]{article}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Package UPSTI_Document
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{inputs/commands}
+
+%---------------------------------%
+% Paramètres du package
+%---------------------------------%
+
+% Version du document (pour la compilation)
+% 1: Document prof
+% 2: Document élève
+% 3: Document à publier
+\input{variables/documentVersion}
+
+% Variante
+%\newcommand{\UPSTIvariante}{2}
+
+\input{variables/infoDoc}
+
+\RequirePackage[cache=false]{minted}
+
+
+% Référence au programme
+%\newcommand{\UPSTIprogramme}{\EPBComp \EPBCompP{B1-02}, \EPBCompP{B2-49}, \EPBCompS{B2-50}, \EPBCompS{B2-51}, \EPBCompP{C1-07}, \EPBCompP{C1-08}}
+
+% Si l'auteur n'est pas l'auteur par défaut
+%\renewcommand{\UPSTIauteur}{WWOOOOOOWW}
+
+% Si le document est réalisé au nom de l'équipe
+%\newcommand{\UPSTIdocumentCollegial}{1}
+
+% Source
+%\newcommand{\UPSTIsource}{UPSTI}
+
+% Version du document
+\newcommand{\UPSTInumeroVersion}{1.0}
+
+%-----------------------------------------------
+\UPSTIcompileVars		% "Compile" les variables
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\include{dirtree}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Début du document
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{grafcet}
+\input{ladder_diagrams/initLadder}
+
+\begin{document}
+\UPSTIbuildPage
+
+%\tableofcontents
+
+\section{Unity Pro}
+\subsection{Téléchargement}
+	Afin de réaliser ce TP, vous devez télécharger et installer UnityPro sur votre ordinateur.
+
+	Ce fichier est disponible sur le lien suivant : \url{
+https://www.dropbox.com/sh/swx955v2w91w0ua/AAC5ps8t7uz9rY4cHxClXFura?dl=0}
+
+La page vous demandera un mot de passe. Le mot de passe est le suivant
+
+\begin{description}
+	\item [Lien de téléchargement : ] \url{
+https://www.dropbox.com/sh/swx955v2w91w0ua/AAC5ps8t7uz9rY4cHxClXFura?dl=0}
+	\item [Mot de passe : ] automatismes
+\end{description}
+
+
+\subsection{Installation}
+Décompressez l'archive et les sous-archives que vous aurez alors téléchargées.
+
+Ouvrez l'ISO puis double-cliquez sur \textit{setup.exe}
+
+Durant l'installation, il vous sera demandé des informations sur le produit (Fiigure~\ref{fig:refNum}) :
+\begin{description}
+	\item [Num Produit : ]UNYSPUEEFV1X
+	\item [Numéro de série : ] 21140211496
+\end{description}
+
+\begin{figure}[h!t]
+\centering
+	\includegraphics[width=.5\textwidth]{images/installationUnity/installNumProduit}
+	\caption{Numéro de référence}
+	\label{fig:refNum}
+\end{figure}
+
+L'installation dure alors quelques minutes.
+
+\subsection{Enregistrement}
+Une fois l'installation terminée, lancez le logiciel. Une fenêtre s'ouvre vous informant que votre produit n'est pas enregistré et vous demande si vous voulez l'enregistrer maintenant. Cliquez sur \textbf{Oui}, sélectionnez \textbf{Saisir le code d'autorisation reçu} puis cliquez sur Suivant et Suivant. Vous pouvez alors rentrer le code d'autorisation reçu. La Figure~\ref{fig:enregistrement} vous montre les différentes fenêtre pour l'enregistrement.
+
+\begin{description}
+	\item [Code d'autorisation : ] 52267224
+\end{description}
+
+\begin{figure}[h!t]
+	\includegraphics[width=.45\textwidth]{images/installationUnity/enregistrement}%
+	\hfill \includegraphics[width=.45\textwidth]{images/installationUnity/enregistrement-2}
+
+\vspace{1cm}
+	\includegraphics[width=.45\textwidth]{images/installationUnity/enregistrement-3}%
+	\hfill \includegraphics[width=.45\textwidth]{images/installationUnity/enregistrement-4}
+	\caption{Procédure d'enrgistrement}
+	\label{fig:enregistrement}
+\end{figure}
+
+\pagebreak
+\section{Travail demandé}
+Cette séance de travaux pratiques porte sur un système de tri de pièce. Il s'agit du même système que celui du sujet du TD n°3.
+À la fin de la première séance, vous devez avoir implémenté les deux premiers cahier des charges.
+
+Vous avez un total de deux séances pour compléter \textbf{entièrement} le TP disponible en ligne : \url{http://public.iutenligne.net/informatique/informatique-industrielle/deprez_maillefert/Autom/3TriPieces/}
+
+\subsection{Présentation de la page en ligne}
+Après avoir cliqué sur ce \href{http://public.iutenligne.net/informatique/informatique-industrielle/deprez_maillefert/Autom/3TriPieces/}{lien}, vous devriez obtenir la page suivante :
+
+\begin{figure}[h]
+\includegraphics[width=.8\textwidth]{images/triDePieceIutEnLigne/accueil}
+	\caption{Page d'accueil du TP}
+\end{figure}
+
+Vous pouvez cliquer sur \textbf{suivant} en bas de la page pour passer à la page suivante
+\end{document}
