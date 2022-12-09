@@ -7,10 +7,17 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Package UPSTI_Document
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+\usepackage[QCM]{UPSTI_Document}
 \usepackage{import}
-\input{inputs/commands}
+\usepackage{subcaption}
+\newcommand{\cmark}{\color{green}\ding{51}}%
+\newcommand{\xmark}{\color{red}\ding{55}}%
+\newcommand{\fmark}{\ding{229}}%
+\newcommand{\itemc}{\item[\cmark]}%
+\newcommand{\itemx}{\item[\xmark]}%
+\newcommand{\itemf}{\item[\fmark]}%
 
+\RequirePackage{multicol}
 %---------------------------------%
 % Paramètres du package
 %---------------------------------%
@@ -32,7 +39,7 @@
 %\newcommand{\UPSTIdocumentCollegial}{1}
 
 % Source
-\newcommand{\UPSTIsource}{A. Juton, J. Deprez, J. Maillefert, G. Vaquette}
+\newcommand{\UPSTIsource}{G. Vaquette, J. Maillefert, H. Discours}
 
 % Version du document
 \newcommand{\UPSTInumeroVersion}{1.0}
@@ -79,7 +86,8 @@ Les automates présentent, entre autres, les avantages et inconvénients suivant
 \end{minipage}
 
 La facilité et la rapidité de développement ainsi que sa robustesse et l'électronique optimisée par le fabricant rendent l'automate plus utilisé que le micro-contrôleur dans l'industrie de production et dans le domaine de la {\textbf{G}estion \textbf{T}echnique des \textbf{B}âtiments (\textbf{GTB})}.
-automatisme-S2-TP-01/
+\begin{multicols}{2}
+	\begin{itemize}
 		\item Siemens (n°1, allemand)
 		\item Schneider Electric (français)
 		\item Rockwell Automation (américain)
